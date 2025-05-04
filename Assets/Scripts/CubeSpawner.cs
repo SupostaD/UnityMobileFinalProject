@@ -6,9 +6,9 @@ public class CubeSpawner : MonoBehaviour
 
     public static GameObject prefab;
 
-    ObjectPool<GameObject> pool = 
-        new ObjectPool<GameObject>(CreatePooledItem(), OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject(), false, 10, maxPoolSize);
-    CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, false, 10, maxPoolSize
+    // ObjectPool<GameObject> pool = 
+    //     new ObjectPool<GameObject>(CreatePooledItem(), OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject(), false, 10, maxPoolSize);
+    // CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, false, 10, maxPoolSize
 
     private static void OnDestroyPoolObject(GameObject obj)
     {
@@ -34,12 +34,12 @@ public class CubeSpawner : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            newObject = pool.Get();
+            // newObject = pool.Get();
         }
 
         if (Input.GetKey(KeyCode.B))
         {
-            pool.Release(newObject);
+            // pool.Release(newObject);
         }
     }
 }
