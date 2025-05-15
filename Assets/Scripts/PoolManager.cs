@@ -1,14 +1,13 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
 
     public GameObject enemy;
-    public int amountOfEnemies;
+    public int amountOfEnemies = 10;
+    public Transform[] spawnPoints;
 
-    private List<GameObject> enemies;
+    private GameObject[] enemies;
     
     void Start()
     {
@@ -17,17 +16,18 @@ public class PoolManager : MonoBehaviour
 
     private void CreatePool()
     {
-        enemies = new List<GameObject>();
+        enemies = new GameObject[amountOfEnemies];
         
         for (int i = 0; i < amountOfEnemies; i++)
         {
             GameObject newEnemy = Instantiate(enemy);
-            ReturnToPool(newEnemy);
-            enemies.Add(newEnemy);
+            newEnemy.transform.position = spawnPoints[i].position;
+            newEnemy.GetComponent<EnemyManager>().Initialize();
+            enemies[i] = newEnemy;
         }
     }
 
-    public GameObject GetPoolObject()
+    /*public GameObject GetPoolObject()
     {
         for (int i = 0; i < enemies.Count; i++)
         {
@@ -37,8 +37,8 @@ public class PoolManager : MonoBehaviour
         return null;
     }
     
-    void ReturnToPool(GameObject poolObject)
+    public void ReturnToPool(GameObject poolObject)
     {
         poolObject.SetActive(false);
-    }
+    }*/
 }
