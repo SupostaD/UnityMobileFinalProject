@@ -8,11 +8,15 @@ public class AutoShooter : MonoBehaviour
     public LayerMask EnemyLayer;
     public float FireRate = 1f;
     public CircleDrawerDynamicAim AimCircle;
+    public PlayerRoll playerRoll;
 
     private float fireCooldown;
 
     void Update()
     {
+        if (playerRoll.IsRolling())
+            return;
+
         fireCooldown -= Time.deltaTime;
 
         float radius = AimCircle != null ? AimCircle.currentRadius : 5f;

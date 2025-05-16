@@ -2,27 +2,32 @@ using UnityEngine;
 
 public class AutoCover : MonoBehaviour
 {
-    public CircleDrawer coverCircle;
-    public FloatingJoystick joystick;
-    public LayerMask coverLayer;
-    public float hideDistance = 1.2f;
-    public float moveSpeed = 3f;
-    public float joystickThreshold = 0.05f;
+    public CircleDrawer СoverCircle;
+    public FloatingJoystick Joystick;
+    public LayerMask СoverLayer;
+    public float HideDistance = 1.2f;
+    public float MoveSpeed = 3f;
+    public float JoystickThreshold = 0.05f;
+    public PlayerRoll PlayerRoll;
 
     private Transform targetCover;
     private bool isMovingToCover = false;
 
     void Update()
     {
-        float radius = coverCircle.Radius;
+        if (PlayerRoll.IsRolling())
+        {
+            isMovingToCover = false;
+            return;
+        }
 
-        // Проверяем: игрок стоит спокойно
-        bool isIdle = joystick.Direction.magnitude < joystickThreshold;
+        float radius = СoverCircle.Radius;
+
+        bool isIdle = Joystick.Direction.magnitude < JoystickThreshold;
 
         if (isIdle)
         {
-            // Ищем укрытия
-            Collider[] covers = Physics.OverlapSphere(transform.position, radius * 2, coverLayer);
+            Collider[] covers = Physics.OverlapSphere(transform.position, radius * 2, СoverLayer);
 
             if (covers.Length > 0)
             {
@@ -35,21 +40,17 @@ public class AutoCover : MonoBehaviour
         }
         else
         {
-            // Игрок начал двигаться — отменяем автоматическое движение
             isMovingToCover = false;
             targetCover = null;
         }
 
-        // Перемещение к укрытию, если включено
         if (isMovingToCover && targetCover != null)
         {
             Vector3 directionAwayFromCover = (transform.position - targetCover.position).normalized;
-            Vector3 targetPosition = targetCover.position + directionAwayFromCover * hideDistance;
+            Vector3 targetPosition = targetCover.position + directionAwayFromCover * HideDistance;
 
-            // Двигаемся плавно
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, MoveSpeed * Time.deltaTime);
 
-            // Если дошёл до позиции — останавливаем
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
                 isMovingToCover = false;

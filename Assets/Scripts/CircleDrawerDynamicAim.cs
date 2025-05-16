@@ -4,11 +4,13 @@ public class CircleDrawerDynamicAim : MonoBehaviour
 {
     public FloatingJoystick Joystick;
     public Transform Player;
+    public PlayerRoll PlayerRoll;
 
     public float MaxRadius = 10f;
     public float MinRadius = 5f;
     public float ChangeSpeed = 2f;
     public int Segments = 100;
+    public float rollChangeSpeed = 10f;
 
     private LineRenderer lineRenderer;
     public float currentRadius;
@@ -26,10 +28,22 @@ public class CircleDrawerDynamicAim : MonoBehaviour
 
     void Update()
     {
+        bool isRolling = PlayerRoll.IsRolling();
         bool isMoving = Joystick.Direction.magnitude > 0.05f;
 
-        float targetRadius = isMoving ? MinRadius : MaxRadius;
-        currentRadius = Mathf.Lerp(currentRadius, targetRadius, Time.deltaTime * ChangeSpeed);
+        float targetRadius;
+
+        if (isRolling || isMoving)
+        {
+            targetRadius = MinRadius;
+        }
+        else
+        {
+            targetRadius = MaxRadius;
+        }
+
+        float speed = isRolling ? rollChangeSpeed : ChangeSpeed;
+        currentRadius = Mathf.Lerp(currentRadius, targetRadius, Time.deltaTime * speed);
 
         UpdateCircle(currentRadius);
 
