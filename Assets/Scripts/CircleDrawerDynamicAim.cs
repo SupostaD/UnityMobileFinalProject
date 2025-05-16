@@ -2,49 +2,45 @@ using UnityEngine;
 
 public class CircleDrawerDynamicAim : MonoBehaviour
 {
-    public Transform player;
-    public float maxRadius = 10f;
-    public float minRadius = 5f;
-    public float changeSpeed = 2f;
-    public int segments = 100;
+    public FloatingJoystick Joystick;
+    public Transform Player;
+
+    public float MaxRadius = 10f;
+    public float MinRadius = 5f;
+    public float ChangeSpeed = 2f;
+    public int Segments = 100;
 
     private LineRenderer lineRenderer;
-    private float currentRadius;
-    private Vector3 lastPosition;
+    public float currentRadius;
 
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.loop = true;
         lineRenderer.useWorldSpace = false;
-        lineRenderer.positionCount = segments;
+        lineRenderer.positionCount = Segments;
 
-        currentRadius = maxRadius;
-        lastPosition = player.position;
-
+        currentRadius = MaxRadius;
         UpdateCircle(currentRadius);
     }
 
     void Update()
     {
-        bool isMoving = (player.position - lastPosition).sqrMagnitude > 0.001f;
+        bool isMoving = Joystick.Direction.magnitude > 0.05f;
 
-        float targetRadius = isMoving ? minRadius : maxRadius;
-
-        currentRadius = Mathf.Lerp(currentRadius, targetRadius, Time.deltaTime * changeSpeed);
+        float targetRadius = isMoving ? MinRadius : MaxRadius;
+        currentRadius = Mathf.Lerp(currentRadius, targetRadius, Time.deltaTime * ChangeSpeed);
 
         UpdateCircle(currentRadius);
 
-        lastPosition = player.position;
-
-        transform.position = new Vector3(player.position.x, transform.position.y, player.position.z);
+        transform.position = new Vector3(Player.position.x, transform.position.y, Player.position.z);
     }
 
     void UpdateCircle(float radius)
     {
-        for (int i = 0; i < segments; i++)
+        for (int i = 0; i < Segments; i++)
         {
-            float angle = ((float)i / segments) * Mathf.PI * 2f;
+            float angle = ((float)i / Segments) * Mathf.PI * 2f;
             float x = Mathf.Cos(angle) * radius;
             float z = Mathf.Sin(angle) * radius;
             lineRenderer.SetPosition(i, new Vector3(x, 0f, z));

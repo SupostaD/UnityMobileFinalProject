@@ -1,23 +1,39 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CircleDrawer : MonoBehaviour
 {
-    public float radius = 5f;
-    public int segments = 100;
+    public Transform Player;
+    public float Radius = 5f;
+    public int Segments = 100;
+    private LineRenderer lineRenderer;
+
 
     void Start()
     {
-        LineRenderer line = GetComponent<LineRenderer>();
-        line.useWorldSpace = false;
-        line.loop = true;
-        line.positionCount = segments;
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.loop = true;
+        lineRenderer.useWorldSpace = false;
+        lineRenderer.positionCount = Segments;
 
-        for (int i = 0; i < segments; i++)
+        UpdateCircle();
+    }
+
+    void Update()
+    {
+        UpdateCircle();
+
+        transform.position = new Vector3(Player.position.x, transform.position.y, Player.position.z);
+    }
+
+    void UpdateCircle()
+    {
+        for (int i = 0; i < Segments; i++)
         {
-            float angle = ((float)i / segments) * Mathf.PI * 2f;
-            float x = Mathf.Cos(angle) * radius;
-            float z = Mathf.Sin(angle) * radius;
-            line.SetPosition(i, new Vector3(x, 0.05f, z));
+            float angle = ((float)i / Segments) * Mathf.PI * 2f;
+            float x = Mathf.Cos(angle) * Radius;
+            float z = Mathf.Sin(angle) * Radius;
+            lineRenderer.SetPosition(i, new Vector3(x, 0f, z));
         }
     }
 }
