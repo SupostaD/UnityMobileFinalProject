@@ -152,8 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0d3effdc3d72d4581e1e4e0b5dfdbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
-  segments: 100
+  Player: {fileID: 0}
+  Radius: 5
+  Segments: 100
 --- !u!1 &4312468420095123000
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,12 +307,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1644d9ca5576e45aca2baaaa5401d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 0}
-  player: {fileID: 349624605360765276}
-  maxRadius: 10
-  minRadius: 5
-  changeSpeed: 5
-  segments: 100
+  Joystick: {fileID: 0}
+  Player: {fileID: 0}
+  MaxRadius: 10
+  MinRadius: 5
+  ChangeSpeed: 2
+  Segments: 100
+  currentRadius: 0
 --- !u!1 &6700734351011439898
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +360,7 @@ GameObject:
   - component: {fileID: 3427041021469579169}
   - component: {fileID: 7132401780457301740}
   - component: {fileID: 4544975489229814333}
+  - component: {fileID: 738029495251517565}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -511,11 +514,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d815338f3efd3049bb09f1dbf7c8688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 7039745181856366552}
-  bulletPrefab: {fileID: 0}
-  bulletSpeed: 10
-  enemyLayer:
+  FirePoint: {fileID: 0}
+  BulletPrefab: {fileID: 0}
+  BulletSpeed: 10
+  EnemyLayer:
     serializedVersion: 2
-    m_Bits: 8
-  fireRate: 1
-  aimCircle: {fileID: 0}
+    m_Bits: 0
+  FireRate: 1
+  AimCircle: {fileID: 0}
+--- !u!114 &738029495251517565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366333500188378891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b9ea45d68cdcf42b8b2db80b9a1705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coverCircle: {fileID: 8395948123821442086}
+  coverLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  hideDistance: 1.2
+  moveSpeed: 3
