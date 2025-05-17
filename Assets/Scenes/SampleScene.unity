@@ -131,9 +131,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy2
       objectReference: {fileID: 0}
+    - target: {fileID: 4280011068956294652, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1105145309}
     - target: {fileID: 8861946243414095442, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.6
+      value: -0.86
       objectReference: {fileID: 0}
     - target: {fileID: 8861946243414095442, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -141,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8861946243414095442, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.2
+      value: 17.16
       objectReference: {fileID: 0}
     - target: {fileID: 8861946243414095442, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1085,6 +1089,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1
       objectReference: {fileID: 0}
+    - target: {fileID: 4280011068956294652, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1105145309}
+    - target: {fileID: 4280011068956294652, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
+      propertyPath: ShootRadius
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280011068956294652, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
+      propertyPath: shootRadius
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8861946243414095442, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.7
@@ -1211,6 +1227,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1602048593}
     - target: {fileID: 738029495251517565, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: HideDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 738029495251517565, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: hideDistance
       value: 3
       objectReference: {fileID: 0}
@@ -1280,6 +1300,14 @@ PrefabInstance:
       objectReference: {fileID: 431429420}
     - target: {fileID: 7366333500188378891, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7366333500188378891, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7366333500188378891, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8395948123821442086, guid: e2357efd994712a4fa16339adf694491, type: 3}
