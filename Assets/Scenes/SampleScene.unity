@@ -800,7 +800,7 @@ MonoBehaviour:
     m_Bits: 8
   FireRate: 1
   AimCircle: {fileID: 2057473516}
-  PlayerRoll: {fileID: 0}
+  PlayerRoll: {fileID: 1602048593}
 --- !u!54 &1602048588 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 3427041021469579169, guid: e2357efd994712a4fa16339adf694491, type: 3}
@@ -1198,6 +1198,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 431429420}
+    - target: {fileID: 738029495251517565, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: MoveSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 738029495251517565, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: moveSpeed
       value: 7
