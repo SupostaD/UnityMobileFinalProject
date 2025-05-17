@@ -1497,6 +1497,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1602048593}
     - target: {fileID: 738029495251517565, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: overCircle
+      value: 
+      objectReference: {fileID: 628297871}
+    - target: {fileID: 738029495251517565, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: hideDistance
       value: 3
       objectReference: {fileID: 0}
@@ -1576,9 +1580,7 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1105145309}
-    m_RemovedComponents:
-    - {fileID: 4544975489229814333, guid: e2357efd994712a4fa16339adf694491, type: 3}
-    - {fileID: 7132401780457301740, guid: e2357efd994712a4fa16339adf694491, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

@@ -309,10 +309,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Joystick: {fileID: 0}
   Player: {fileID: 0}
+  PlayerRoll: {fileID: 0}
   MaxRadius: 10
   MinRadius: 5
   ChangeSpeed: 2
   Segments: 100
+  rollChangeSpeed: 10
   currentRadius: 0
 --- !u!1 &6700734351011439898
 GameObject:
@@ -358,8 +360,6 @@ GameObject:
   - component: {fileID: 9218304518853107942}
   - component: {fileID: 7214648159652955718}
   - component: {fileID: 3427041021469579169}
-  - component: {fileID: 7132401780457301740}
-  - component: {fileID: 4544975489229814333}
   - component: {fileID: 738029495251517565}
   m_Layer: 0
   m_Name: Player
@@ -487,41 +487,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7132401780457301740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7366333500188378891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 628aed1c3ce4ce345b9da8550e118b3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveSpeed: 7
-  Joystick: {fileID: 0}
-  Rb: {fileID: 3427041021469579169}
---- !u!114 &4544975489229814333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7366333500188378891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d815338f3efd3049bb09f1dbf7c8688, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FirePoint: {fileID: 0}
-  BulletPrefab: {fileID: 0}
-  BulletSpeed: 10
-  EnemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  FireRate: 1
-  AimCircle: {fileID: 0}
 --- !u!114 &738029495251517565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,9 +499,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b9ea45d68cdcf42b8b2db80b9a1705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coverCircle: {fileID: 8395948123821442086}
-  coverLayer:
+  overCircle: {fileID: 0}
+  Joystick: {fileID: 0}
+  overLayer:
     serializedVersion: 2
-    m_Bits: 64
-  hideDistance: 1.2
-  moveSpeed: 3
+    m_Bits: 0
+  HideDistance: 1.2
+  MoveSpeed: 3
+  JoystickThreshold: 0.05
+  PlayerRoll: {fileID: 0}
