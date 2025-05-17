@@ -2,43 +2,30 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-
-    public GameObject enemy;
-    public int amountOfEnemies = 10;
+    public GameObject enemyPrefab;
+    public int poolSize = 10;
     public Transform[] spawnPoints;
 
-    private GameObject[] enemies;
-    
+    private GameObject[] enemyPool;
+
     void Start()
     {
-        CreatePool();
+        CreateEnemyPool();
     }
 
-    private void CreatePool()
+    void CreateEnemyPool()
     {
-        enemies = new GameObject[amountOfEnemies];
-        
-        for (int i = 0; i < amountOfEnemies; i++)
-        {
-            GameObject newEnemy = Instantiate(enemy);
-            newEnemy.transform.position = spawnPoints[i].position;
-            newEnemy.GetComponent<EnemyManager>().Initialize();
-            enemies[i] = newEnemy;
-        }
-    }
+        enemyPool = new GameObject[poolSize];
 
-    /*public GameObject GetPoolObject()
-    {
-        for (int i = 0; i < enemies.Count; i++)
+        for (int i = 0; i < poolSize; i++)
         {
-            if (!enemies[i].activeInHierarchy)
-                return enemies[i];
+            GameObject enemy = Instantiate(enemyPrefab);
+            enemy.transform.position = spawnPoints[i % spawnPoints.Length].position;
+            
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            enemyScript.SetInactiveState();
+            
+            enemyPool[i] = enemy;
         }
-        return null;
     }
-    
-    public void ReturnToPool(GameObject poolObject)
-    {
-        poolObject.SetActive(false);
-    }*/
 }
