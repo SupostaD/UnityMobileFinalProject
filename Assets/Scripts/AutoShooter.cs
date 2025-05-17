@@ -8,13 +8,13 @@ public class AutoShooter : MonoBehaviour
     public LayerMask EnemyLayer;
     public float FireRate = 1f;
     public CircleDrawerDynamicAim AimCircle;
-    public PlayerRoll playerRoll;
+    public PlayerRoll PlayerRoll;
 
     private float fireCooldown;
 
     void Update()
     {
-        if (playerRoll.IsRolling())
+        if (PlayerRoll.IsRolling())
             return;
 
         fireCooldown -= Time.deltaTime;
@@ -56,9 +56,6 @@ public class AutoShooter : MonoBehaviour
         Vector3 dir = (target.position - FirePoint.position).normalized;
         GameObject bullet = Instantiate(BulletPrefab, FirePoint.position, Quaternion.LookRotation(dir));
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.linearVelocity = dir * BulletSpeed;
-        }
+        rb.linearVelocity = dir * BulletSpeed;
     }
 }
