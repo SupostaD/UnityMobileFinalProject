@@ -309,10 +309,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Joystick: {fileID: 0}
   Player: {fileID: 0}
+  PlayerRoll: {fileID: 0}
   MaxRadius: 10
   MinRadius: 5
   ChangeSpeed: 2
   Segments: 100
+  rollChangeSpeed: 10
   currentRadius: 0
 --- !u!1 &6700734351011439898
 GameObject:
@@ -502,6 +504,7 @@ MonoBehaviour:
   MoveSpeed: 7
   Joystick: {fileID: 0}
   Rb: {fileID: 3427041021469579169}
+  PlayerRoll: {fileID: 0}
 --- !u!114 &4544975489229814333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,6 +525,7 @@ MonoBehaviour:
     m_Bits: 0
   FireRate: 1
   AimCircle: {fileID: 0}
+  PlayerRoll: {fileID: 0}
 --- !u!114 &738029495251517565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,9 +538,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b9ea45d68cdcf42b8b2db80b9a1705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coverCircle: {fileID: 8395948123821442086}
-  coverLayer:
+  "\u0421overCircle": {fileID: 0}
+  Joystick: {fileID: 0}
+  "\u0421overLayer":
     serializedVersion: 2
-    m_Bits: 64
-  hideDistance: 1.2
-  moveSpeed: 3
+    m_Bits: 0
+  HideDistance: 1.2
+  MoveSpeed: 3
+  JoystickThreshold: 0.05
+  PlayerRoll: {fileID: 0}
