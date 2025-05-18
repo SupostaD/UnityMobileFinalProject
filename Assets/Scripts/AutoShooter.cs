@@ -9,6 +9,7 @@ public class AutoShooter : MonoBehaviour
     public float FireRate = 1f;
     public CircleDrawerDynamicAim AimCircle;
     public PlayerRoll PlayerRoll;
+    public float MinShootRadius = 5.1f;
 
     private float fireCooldown;
 
@@ -20,6 +21,9 @@ public class AutoShooter : MonoBehaviour
         fireCooldown -= Time.deltaTime;
 
         float radius = AimCircle != null ? AimCircle.currentRadius : 5f;
+
+        if (radius <= MinShootRadius)
+            return;
 
         Collider[] enemies = Physics.OverlapSphere(transform.position, radius * 2, EnemyLayer);
 
@@ -54,6 +58,26 @@ public class AutoShooter : MonoBehaviour
     void Shoot(Transform target)
     {
         Vector3 dir = (target.position - FirePoint.position).normalized;
+
+        Vector3 lookDir = target.position - transform.position;
+        lookDir.y = 0f;
+
+        if (lookDir.sqrMagnitude > 0.01f)
+        {
+            transform.rotation = Quaternion.LookRotation(lookDir);
+        }
+
+        RaycastHit hit;
+        float distance = Vector3.Distance(FirePoint.position, target.position);
+
+        if (Physics.Raycast(FirePoint.position, dir, out hit, distance))
+        {
+            if (hit.transform != target)
+            {
+                return;
+            }
+        }
+
         GameObject bullet = Instantiate(BulletPrefab, FirePoint.position, Quaternion.LookRotation(dir));
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = dir * BulletSpeed;
