@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyShooter : MonoBehaviour
 {
@@ -25,18 +26,33 @@ public class EnemyShooter : MonoBehaviour
                 fireCooldown = 1f / FireRate;
                 ShootAtPlayer();
             }
-
-            // Вращаемся к игроку
-            Vector3 lookDir = (Player.position - transform.position).normalized;
-            lookDir.y = 0f;
-            if (lookDir != Vector3.zero)
-                transform.rotation = Quaternion.LookRotation(lookDir);
         }
     }
 
     void ShootAtPlayer()
     {
         Vector3 dir = (Player.position - FirePoint.position).normalized;
+
+
+        Vector3 lookDir = Player.position - transform.position;
+        lookDir.y = 0f;
+
+        if (lookDir.sqrMagnitude > 0.01f)
+        {
+            transform.rotation = Quaternion.LookRotation(lookDir);
+        }
+
+        RaycastHit hit;
+        float distance = Vector3.Distance(FirePoint.position, Player.position);
+
+        if (Physics.Raycast(FirePoint.position, dir, out hit, distance))
+        {
+            if (hit.transform != Player.transform)
+            {
+                return;
+            }
+        }
+
         GameObject bullet = Instantiate(BulletPrefab, FirePoint.position, Quaternion.LookRotation(dir));
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
