@@ -360,8 +360,6 @@ GameObject:
   - component: {fileID: 9218304518853107942}
   - component: {fileID: 7214648159652955718}
   - component: {fileID: 3427041021469579169}
-  - component: {fileID: 7132401780457301740}
-  - component: {fileID: 4544975489229814333}
   - component: {fileID: 738029495251517565}
   - component: {fileID: 7154593231112729846}
   m_Layer: 0
