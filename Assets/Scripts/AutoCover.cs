@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class AutoCover : MonoBehaviour
 {
-    public CircleDrawer overCircle;
+    public CircleDrawer ÑoverCircle;
     public FloatingJoystick Joystick;
-    public LayerMask overLayer;
+    public LayerMask ÑoverLayer;
     public float HideDistance = 1.2f;
     public float MoveSpeed = 3f;
     public float JoystickThreshold = 0.05f;
@@ -21,13 +21,13 @@ public class AutoCover : MonoBehaviour
             return;
         }
 
-        float radius = overCircle.Radius;
+        float radius = ÑoverCircle.Radius;
 
         bool isIdle = Joystick.Direction.magnitude < JoystickThreshold;
 
         if (isIdle)
         {
-            Collider[] covers = Physics.OverlapSphere(transform.position, radius * 2, overLayer);
+            Collider[] covers = Physics.OverlapSphere(transform.position, radius * 2, ÑoverLayer);
 
             if (covers.Length > 0)
             {
