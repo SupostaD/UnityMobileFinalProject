@@ -6,24 +6,22 @@ public class Grenade : MonoBehaviour
     public float explosionRadius = 3f;
     public int damage = 2;
     public LayerMask enemyLayer;
-    public GameObject explosionEffect;
 
-    private void Start()
+    private bool fuseStarted = false;
+
+    public void StartFuse()
     {
-        Invoke("Explode", delay);
+        if (fuseStarted) return;
+        fuseStarted = true;
+        Invoke(nameof(Explode), delay);
     }
 
     void Explode()
     {
-        if (explosionEffect)
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
-
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayer);
         foreach (var enemy in enemies)
         {
-            Debug.Log("Enemy hit by grenade: " + enemy.name);
-            // enemy.GetComponent<EnemyHealth>().TakeDamage(damage); // если есть
-            Destroy(enemy.gameObject); // пока просто уничтожим
+            Destroy(enemy.gameObject);
         }
 
         Destroy(gameObject);
