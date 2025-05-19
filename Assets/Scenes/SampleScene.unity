@@ -139,7 +139,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1105145309}
-<<<<<<< HEAD
     - target: {fileID: 4280011068956294652, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: ShootRadius
       value: 17.43
@@ -147,11 +146,6 @@ PrefabInstance:
     - target: {fileID: 8861946243414095442, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.9
-=======
-    - target: {fileID: 8861946243414095442, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 20.69
->>>>>>> parent of 3eef735 (Code review)
       objectReference: {fileID: 0}
     - target: {fileID: 8861946243414095442, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: m_LocalPosition.y
