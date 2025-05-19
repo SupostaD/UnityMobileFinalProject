@@ -1536,31 +1536,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 431429420}
     - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 1105145309}
-    - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1105145309}
     - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
-      propertyPath: ArcHeight
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: arcHeight
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
-      propertyPath: ArcRenderer
-      value: 
-      objectReference: {fileID: 1578556241}
-    - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
-      propertyPath: MaxDistance
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
-      propertyPath: MinDistance
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
@@ -1572,10 +1552,6 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
-      propertyPath: GrenadePoint
-      value: 
-      objectReference: {fileID: 1456219011}
-    - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: grenadePoint
       value: 
       objectReference: {fileID: 1456219011}
@@ -1584,27 +1560,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
-      propertyPath: GrenadePrefab
-      value: 
-      objectReference: {fileID: 370431208030112375, guid: 43d409f187d359a41933bc4142b43b36, type: 3}
-    - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: maxThrowForce
       value: 200
       objectReference: {fileID: 0}
-    - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
-      propertyPath: GrenadeJoystick
-      value: 
-      objectReference: {fileID: 1920098279}
     - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: grenadeJoystick
       value: 
       objectReference: {fileID: 1920098279}
     - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: targetIndicator
-      value: 
-      objectReference: {fileID: 707275166200485601, guid: dc5ce39ba776b4048b0c99c3cf742227, type: 3}
-    - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
-      propertyPath: TargetCirclePrefab
       value: 
       objectReference: {fileID: 707275166200485601, guid: dc5ce39ba776b4048b0c99c3cf742227, type: 3}
     - target: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
