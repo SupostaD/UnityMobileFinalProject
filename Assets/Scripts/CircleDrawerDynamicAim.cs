@@ -10,7 +10,7 @@ public class CircleDrawerDynamicAim : MonoBehaviour
     public float MinRadius = 5f;
     public float ChangeSpeed = 2f;
     public int Segments = 100;
-    public float rollChangeSpeed = 10f;
+    public float RollChangeSpeed = 10f;
 
     private LineRenderer lineRenderer;
     public float currentRadius;
@@ -42,7 +42,7 @@ public class CircleDrawerDynamicAim : MonoBehaviour
             targetRadius = MaxRadius;
         }
 
-        float speed = isRolling ? rollChangeSpeed : ChangeSpeed;
+        float speed = isRolling ? RollChangeSpeed : ChangeSpeed;
         currentRadius = Mathf.Lerp(currentRadius, targetRadius, Time.deltaTime * speed);
 
         UpdateCircle(currentRadius);
