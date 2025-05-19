@@ -132,10 +132,6 @@ PrefabInstance:
       value: Enemy2
       objectReference: {fileID: 0}
     - target: {fileID: 4280011068956294652, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 1105145309}
-    - target: {fileID: 4280011068956294652, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1105145309}
@@ -834,7 +830,6 @@ MonoBehaviour:
   FireRate: 1
   AimCircle: {fileID: 2057473516}
   PlayerRoll: {fileID: 1602048593}
-  MinShootRadius: 5.1
 --- !u!54 &1602048588 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 3427041021469579169, guid: e2357efd994712a4fa16339adf694491, type: 3}
@@ -1324,10 +1319,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1
       objectReference: {fileID: 0}
-    - target: {fileID: 4280011068956294652, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 1105145309}
     - target: {fileID: 4280011068956294652, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: player
       value: 
