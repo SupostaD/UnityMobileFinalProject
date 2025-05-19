@@ -1,6 +1,4 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-
 public class EnemyShooter : MonoBehaviour
 {
     public Transform Player;
@@ -10,6 +8,7 @@ public class EnemyShooter : MonoBehaviour
     public float BulletSpeed = 10f;
     public float ShootRadius = 5f;
     public LayerMask PlayerLayer;
+    public Collider shooterCollider;
 
     private float fireCooldown;
 
@@ -53,7 +52,15 @@ public class EnemyShooter : MonoBehaviour
             }
         }
 
-        GameObject bullet = Instantiate(BulletPrefab, FirePoint.position, Quaternion.LookRotation(dir));
+        GameObject bullet = EnemyBulletPool.Instance.GetBullet(FirePoint.position, Quaternion.LookRotation(dir));
+        
+        Collider bulletCollider = bullet.GetComponent<Collider>();
+        
+        if (bulletCollider != null && shooterCollider != null)
+        {
+            Physics.IgnoreCollision(bulletCollider, shooterCollider);
+        }
+        
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {

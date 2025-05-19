@@ -10,6 +10,7 @@ public class AutoShooter : MonoBehaviour
     public CircleDrawerDynamicAim AimCircle;
     public PlayerRoll PlayerRoll;
     public float MinShootRadius = 5.1f;
+    public Collider shooterCollider;
 
     private float fireCooldown;
 
@@ -78,7 +79,15 @@ public class AutoShooter : MonoBehaviour
             }
         }
 
-        GameObject bullet = Instantiate(BulletPrefab, FirePoint.position, Quaternion.LookRotation(dir));
+        GameObject bullet = PlayerBulletPool.Instance.GetBullet(FirePoint.position, Quaternion.LookRotation(dir));
+        
+        Collider bulletCollider = bullet.GetComponent<Collider>();
+        
+        if (bulletCollider != null && shooterCollider != null)
+        {
+            Physics.IgnoreCollision(bulletCollider, shooterCollider);
+        }
+        
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = dir * BulletSpeed;
     }

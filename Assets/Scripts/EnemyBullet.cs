@@ -3,23 +3,31 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
     public float LifeTime = 5f;
-    public int Damage = 1;
 
-    void Start()
+    void OnEnable()
     {
-        Destroy(gameObject, LifeTime);
+        CancelInvoke();
+        Invoke(nameof(Deactivate), LifeTime);
+    }
+
+    void Deactivate()
+    {
+        EnemyBulletPool.Instance.ReturnBullet(gameObject);
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        GameObject hitObject = collision.gameObject;
+
+        if (hitObject.CompareTag("Player"))
         {
-            Debug.Log("Player received damage!");
-            Destroy(gameObject);
+            Debug.Log("Bullet hit a player");
+            EnemyBulletPool.Instance.ReturnBullet(gameObject);
         }
-        else
+        else if (hitObject.CompareTag("Bullet"))
         {
-            Destroy(gameObject);
+            
         }
+        else EnemyBulletPool.Instance.ReturnBullet(gameObject);
     }
 }
