@@ -1,21 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class GrenadeThrower : MonoBehaviour
 {
     [Header("References")]
-    public FixedJoystick GrenadeJoystick;
-    public Transform Player;
-    public GameObject TargetCirclePrefab;
-    public Transform GrenadePoint;
-    public LineRenderer ArcRenderer;
-    public GameObject GrenadePrefab;
+    public FixedJoystick grenadeJoystick;
+    public Transform player;
+    public GameObject targetCirclePrefab;
+    public Transform grenadePoint;
+    public LineRenderer arcRenderer;
+    public GameObject grenadePrefab;
 
     [Header("Settings")]
-    public float MinDistance = 1f;
-    public float MaxDistance = 6f;
-    public float ArcHeight = 2f;
-    public int ArcPoints = 30;
+    public float minDistance = 1f;
+    public float maxDistance = 6f;
+    public float arcHeight = 2f;
+    public int arcPoints = 30;
 
     private GameObject currentCircle;
     private GameObject heldGrenade;
@@ -25,7 +26,7 @@ public class GrenadeThrower : MonoBehaviour
 
     void Update()
     {
-        Vector3 input = new Vector3(GrenadeJoystick.Horizontal, 0f, GrenadeJoystick.Vertical);
+        Vector3 input = new Vector3(grenadeJoystick.Horizontal, 0f, grenadeJoystick.Vertical);
 
         if (isHoldingTouch)
         {
@@ -35,14 +36,14 @@ public class GrenadeThrower : MonoBehaviour
             }
 
             UpdateCirclePosition(input);
-            DrawArc(GrenadePoint.position, currentCircle.transform.position);
+            DrawArc(grenadePoint.position, currentCircle.transform.position);
 
-            Vector3 lookDir = currentCircle.transform.position - Player.position;
+            Vector3 lookDir = currentCircle.transform.position - player.position;
             lookDir.y = 0f;
             if (lookDir.sqrMagnitude > 0.01f)
             {
                 Quaternion targetRot = Quaternion.LookRotation(lookDir);
-                Player.rotation = Quaternion.Slerp(Player.rotation, targetRot, 0.2f);
+                player.rotation = Quaternion.Slerp(player.rotation, targetRot, 0.2f);
             }
         }
         else
@@ -58,18 +59,20 @@ public class GrenadeThrower : MonoBehaviour
     {
         isAiming = true;
 
+        // создать цель
         if (currentCircle == null)
-            currentCircle = Instantiate(TargetCirclePrefab);
+            currentCircle = Instantiate(targetCirclePrefab);
 
-        heldGrenade = Instantiate(GrenadePrefab, GrenadePoint.position, Quaternion.identity);
-        heldGrenade.transform.SetParent(GrenadePoint);
+        // создать гранату в руке
+        heldGrenade = Instantiate(grenadePrefab, grenadePoint.position, Quaternion.identity);
+        heldGrenade.transform.SetParent(grenadePoint);
         heldGrenade.transform.localPosition = Vector3.zero;
 
         heldRb = heldGrenade.GetComponent<Rigidbody>();
         heldRb.isKinematic = true;
         heldRb.useGravity = false;
 
-        ArcRenderer.enabled = true;
+        arcRenderer.enabled = true;
         currentCircle.SetActive(true);
     }
 
@@ -77,23 +80,28 @@ public class GrenadeThrower : MonoBehaviour
     {
         isAiming = false;
 
-        ArcRenderer.enabled = false;
+        arcRenderer.enabled = false;
 
         if (heldGrenade != null && currentCircle != null)
         {
+            // отсоединяем гранату
             heldGrenade.transform.SetParent(null);
             heldRb.isKinematic = false;
             heldRb.useGravity = true;
 
             float totalTime;
-            Vector3 velocity = CalculateArcVelocity(GrenadePoint.position, currentCircle.transform.position, ArcHeight, out totalTime);
+            Vector3 velocity = CalculateArcVelocity(grenadePoint.position, currentCircle.transform.position, arcHeight, out totalTime);
 
             heldRb.linearVelocity = velocity;
 
             Grenade grenadeScript = heldGrenade.GetComponent<Grenade>();
-            grenadeScript.StartFuse();
+            if (grenadeScript != null)
+            {
+                grenadeScript.StartFuse();
+            }
         }
 
+        // убрать цель
         if (currentCircle != null)
         {
             Destroy(currentCircle);
@@ -109,28 +117,28 @@ public class GrenadeThrower : MonoBehaviour
         if (currentCircle == null) return;
 
         float clampedMagnitude = Mathf.Clamp(inputDirection.magnitude, 0f, 1f);
-        float distance = Mathf.Lerp(MinDistance, MaxDistance, clampedMagnitude);
+        float distance = Mathf.Lerp(minDistance, maxDistance, clampedMagnitude);
         Vector3 offset = inputDirection.normalized * distance;
 
-        Vector3 targetPos = Player.position + offset;
-        currentCircle.transform.position = new Vector3(targetPos.x, Player.position.y, targetPos.z);
+        Vector3 targetPos = player.position + offset;
+        currentCircle.transform.position = new Vector3(targetPos.x, player.position.y, targetPos.z);
     }
 
     void DrawArc(Vector3 start, Vector3 end)
     {
         float totalTime;
-        Vector3 velocity = CalculateArcVelocity(start, end, ArcHeight, out totalTime);
+        Vector3 velocity = CalculateArcVelocity(start, end, arcHeight, out totalTime);
 
-        ArcRenderer.enabled = true;
-        ArcRenderer.positionCount = ArcPoints;
+        arcRenderer.enabled = true;
+        arcRenderer.positionCount = arcPoints;
 
-        float timeStep = totalTime / (ArcPoints - 1);
+        float timeStep = totalTime / (arcPoints - 1);
 
-        for (int i = 0; i < ArcPoints; i++)
+        for (int i = 0; i < arcPoints; i++)
         {
             float t = i * timeStep;
             Vector3 point = start + velocity * t + 0.5f * Physics.gravity * t * t;
-            ArcRenderer.SetPosition(i, point);
+            arcRenderer.SetPosition(i, point);
         }
     }
 

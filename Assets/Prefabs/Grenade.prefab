@@ -151,9 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc48ffa26074eda44909c6c58ee18893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Delay: 4
-  ExplosionRadius: 3
-  Damage: 2
-  EnemyLayer:
+  delay: 4
+  explosionRadius: 3
+  damage: 2
+  enemyLayer:
     serializedVersion: 2
     m_Bits: 8
