@@ -14,7 +14,12 @@ public class BulletMovement : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Destroy(other.gameObject);
+            Health health = other.GetComponent<Health>();
+            if (health != null)
+            {
+                health.TakeDamage(Damage);
+            }
+
             Destroy(gameObject);
         }
     }

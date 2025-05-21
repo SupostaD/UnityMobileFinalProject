@@ -314,7 +314,7 @@ MonoBehaviour:
   MinRadius: 5
   ChangeSpeed: 2
   Segments: 100
-  rollChangeSpeed: 10
+  RollChangeSpeed: 10
   currentRadius: 0
 --- !u!1 &6700734351011439898
 GameObject:
@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 4544975489229814333}
   - component: {fileID: 738029495251517565}
   - component: {fileID: 7154593231112729846}
+  - component: {fileID: 2010624187772929065}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -529,6 +530,7 @@ MonoBehaviour:
   FireRate: 1
   AimCircle: {fileID: 0}
   PlayerRoll: {fileID: 0}
+  MinShootRadius: 5.1
 --- !u!114 &738029495251517565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,14 +564,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1ea75d46d3a834db66f0bdfe0f76f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grenadeJoystick: {fileID: 0}
-  throwPoint: {fileID: 7729776909860747890}
-  grenadePrefab: {fileID: 370431208030112375, guid: 43d409f187d359a41933bc4142b43b36, type: 3}
-  lineRenderer: {fileID: 6355894081141761132}
-  maxThrowForce: 15
-  throwThreshold: 0.2
-  arcHeight: 2
-  timeToTarget: 1
+  GrenadeJoystick: {fileID: 0}
+  Player: {fileID: 0}
+  TargetCirclePrefab: {fileID: 0}
+  GrenadePoint: {fileID: 0}
+  ArcRenderer: {fileID: 0}
+  GrenadePrefab: {fileID: 0}
+  MinDistance: 1
+  MaxDistance: 6
+  ArcHeight: 2
+  ArcPoints: 30
+--- !u!114 &2010624187772929065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366333500188378891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b8d69c76cf85c47ae03c539f33faa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7743711069800445413
 GameObject:
   m_ObjectHideFlags: 0

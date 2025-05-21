@@ -15,6 +15,11 @@ public class EnemyBullet : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             Debug.Log("Player received damage!");
+
+            Health hp = collision.collider.GetComponent<Health>();
+            if (hp != null)
+                hp.TakeDamage(Damage);
+
             Destroy(gameObject);
         }
         else
