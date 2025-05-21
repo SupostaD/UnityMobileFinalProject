@@ -16,6 +16,7 @@ public class EnemySetup : MonoBehaviour
         {
             Destroy(hb);
             Destroy(gameObject);
-        });
+        }
+            );
     }
 }

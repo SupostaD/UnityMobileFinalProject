@@ -3,14 +3,23 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-    public int maxHealth = 10;
+    public EnemyStats stats;
+    public Difficulty difficulty = Difficulty.Easy;
+    public int manualMaxHealth = 10;
+    
+    private int maxHealth;
     private int currentHealth;
 
     public UnityEvent onDeath;
-    public UnityEvent<float> onHealthChanged; // % здоровья от 0 до 1
+    public UnityEvent<float> onHealthChanged;
 
     void Start()
     {
+        if (stats != null)
+            maxHealth = stats.GetHealthByDifficulty(difficulty);
+        else
+            maxHealth = manualMaxHealth;
+        
         currentHealth = maxHealth;
         onHealthChanged.Invoke(1f);
     }

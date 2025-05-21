@@ -5,26 +5,29 @@ public class EnemyBullet : MonoBehaviour
     public float LifeTime = 5f;
     public int Damage = 1;
 
-    void Start()
+    void OnEnable()
     {
-        Destroy(gameObject, LifeTime);
+        CancelInvoke();
+        Invoke(nameof(Deactivate), LifeTime);
     }
 
+    void Deactivate()
+    {
+        EnemyBulletPool.Instance.ReturnBullet(gameObject);
+    }
+    
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        GameObject hitObject = collision.gameObject;
+        
+        if (hitObject.CompareTag("Player"))
         {
-            Debug.Log("Player received damage!");
-
             Health hp = collision.collider.GetComponent<Health>();
             if (hp != null)
                 hp.TakeDamage(Damage);
 
-            Destroy(gameObject);
+            EnemyBulletPool.Instance.ReturnBullet(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        else EnemyBulletPool.Instance.ReturnBullet(gameObject);
     }
 }

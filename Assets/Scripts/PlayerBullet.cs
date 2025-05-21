@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
     public float LifeTime = 5f;
+    public int Damage = 5;
 
     void OnEnable()
     {
@@ -21,14 +22,13 @@ public class PlayerBullet : MonoBehaviour
         
         if (hitObject.CompareTag("Enemy"))
         {
-            hitObject.SetActive(false);
+            Health hp = hitObject.GetComponent<Health>();
+            if (hp != null)
+                hp.TakeDamage(Damage);
+            
             PlayerBulletPool.Instance.ReturnBullet(gameObject);
 
         } 
-        else if (hitObject.CompareTag("Bullet"))
-        {
-            Debug.Log("Bullet collided with a bullet");
-        }
         else PlayerBulletPool.Instance.ReturnBullet(gameObject);
 
     }

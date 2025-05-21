@@ -127,13 +127,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   FirePoint: {fileID: 122506253317168474}
-  BulletPrefab: {fileID: 7509108459534842027, guid: ff158aba10b44674ab775bb0a9b62e87, type: 3}
+  BulletPrefab: {fileID: 3012808492320493129, guid: 9ca9d0c0d22864a469f41e3ee1d4013f, type: 3}
   FireRate: 1
   BulletSpeed: 10
-  ShootRadius: 5
+  ShootRadius: 20
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 128
+  shooterCollider: {fileID: 0}
 --- !u!114 &-1335500669706726009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b8d69c76cf85c47ae03c539f33faa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  stats: {fileID: 11400000, guid: 353c64b7fb04ea44781b4743a1a35094, type: 2}
+  difficulty: 0
   onDeath:
     m_PersistentCalls:
       m_Calls: []
