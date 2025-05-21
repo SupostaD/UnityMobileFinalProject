@@ -18,10 +18,12 @@ public class Grenade : MonoBehaviour
 
     void Explode()
     {
-        Collider[] enemies = Physics.OverlapSphere(transform.position, ExplosionRadius, EnemyLayer);
-        foreach (var enemy in enemies)
+        Collider[] hits = Physics.OverlapSphere(transform.position, ExplosionRadius, EnemyLayer);
+
+        foreach (var hit in hits)
         {
-            Destroy(enemy.gameObject);
+            Health health = hit.GetComponent<Health>();
+            health.TakeDamage(Damage);
         }
 
         Destroy(gameObject);
