@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4476907551222432202}
   - component: {fileID: 4280011068956294652}
   - component: {fileID: -1335500669706726009}
-  - component: {fileID: 4033019437345005994}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
@@ -149,25 +148,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 353c64b7fb04ea44781b4743a1a35094, type: 2}
   difficulty: 0
-  onDeath:
+  manualMaxHealth: 10
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 54281057952729912}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
-  onHealthChanged:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &4033019437345005994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54281057952729912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4d86524de150da4f955fa40779b6f6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBarPrefab: {fileID: 3717280719528614269}
 --- !u!1 &1346793808597552071
 GameObject:
   m_ObjectHideFlags: 0

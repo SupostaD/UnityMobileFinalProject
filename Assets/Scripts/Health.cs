@@ -6,12 +6,14 @@ public class Health : MonoBehaviour
     public EnemyStats stats;
     public Difficulty difficulty = Difficulty.Easy;
     public int manualMaxHealth = 10;
-    
+
     private int maxHealth;
     private int currentHealth;
 
-    public UnityEvent onDeath;
-    public UnityEvent<float> onHealthChanged;
+    public UnityEvent OnDeath;
+    public UnityEvent<float> OnHealthChanged;
+
+    private IHealthUIUpdater[] uiElements;
 
     void Start()
     {
@@ -19,20 +21,35 @@ public class Health : MonoBehaviour
             maxHealth = stats.GetHealthByDifficulty(difficulty);
         else
             maxHealth = manualMaxHealth;
-        
+
         currentHealth = maxHealth;
-        onHealthChanged.Invoke(1f);
+
+        uiElements = GetComponentsInChildren<IHealthUIUpdater>();
+
+        UpdateAllUI();
     }
 
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        onHealthChanged.Invoke((float)currentHealth / maxHealth);
+
+        UpdateAllUI();
 
         if (currentHealth <= 0)
         {
-            onDeath.Invoke();
+            OnDeath?.Invoke();
+        }
+    }
+
+    private void UpdateAllUI()
+    {
+        float normalized = (float)currentHealth / maxHealth;
+        OnHealthChanged?.Invoke(normalized);
+
+        foreach (var ui in uiElements)
+        {
+            ui.UpdateUI(normalized);
         }
     }
 }

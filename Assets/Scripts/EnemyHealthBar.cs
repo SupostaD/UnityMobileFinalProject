@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHealthBar : MonoBehaviour
+public class EnemyHealthBar : MonoBehaviour, IHealthUIUpdater
 {
     public Transform target;
     public Image fillImage;
@@ -9,11 +9,14 @@ public class EnemyHealthBar : MonoBehaviour
 
     void Update()
     {
-        transform.position = target.position + offset;
-        transform.forward = Camera.main.transform.forward;
+        if (target != null)
+        {
+            transform.position = target.position + offset;
+            transform.forward = Camera.main.transform.forward;
+        }
     }
 
-    public void SetHealth(float value)
+    public void UpdateUI(float value)
     {
         fillImage.fillAmount = value;
     }
