@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2667405681516086549}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5263158, z: 0.44}
+  m_LocalPosition: {x: 0, y: -0.328, z: 0}
   m_LocalScale: {x: 1, y: 0.4385965, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0d3effdc3d72d4581e1e4e0b5dfdbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  Player: {fileID: 349624605360765276}
   Radius: 5
   Segments: 100
 --- !u!1 &4312468420095123000
@@ -182,7 +182,7 @@ Transform:
   m_GameObject: {fileID: 4312468420095123000}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.423, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -308,8 +308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Joystick: {fileID: 0}
-  Player: {fileID: 0}
-  PlayerRoll: {fileID: 0}
+  Player: {fileID: 349624605360765276}
+  PlayerRoll: {fileID: 59011298132736476}
   MaxRadius: 10
   MinRadius: 5
   ChangeSpeed: 2
@@ -361,11 +361,15 @@ GameObject:
   - component: {fileID: 7214648159652955718}
   - component: {fileID: 3427041021469579169}
   - component: {fileID: 738029495251517565}
+  - component: {fileID: 1793098931237775553}
   - component: {fileID: 7154593231112729846}
   - component: {fileID: 2010624187772929065}
-  m_Layer: 0
+  - component: {fileID: 7726766517034950423}
+  - component: {fileID: 884833806685452161}
+  - component: {fileID: 59011298132736476}
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -380,7 +384,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.2, z: 0.06}
-  m_LocalScale: {x: 1, y: 2.28, z: 1}
+  m_LocalScale: {x: 2, y: 4.28, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2833946633586676319}
@@ -486,11 +490,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!114 &738029495251517565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,15 +507,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b9ea45d68cdcf42b8b2db80b9a1705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overCircle: {fileID: 0}
+  overCircle: {fileID: 8395948123821442086}
   Joystick: {fileID: 0}
   overLayer:
     serializedVersion: 2
-    m_Bits: 0
-  HideDistance: 1.2
-  MoveSpeed: 3
+    m_Bits: 64
+  HideDistance: 3
+  MoveSpeed: 7
   JoystickThreshold: 0.05
-  PlayerRoll: {fileID: 0}
+  PlayerRoll: {fileID: 59011298132736476}
+--- !u!114 &1793098931237775553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366333500188378891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a96fc8e6fc1554f8bd30c249405c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 0}
 --- !u!114 &7154593231112729846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,14 +542,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GrenadeJoystick: {fileID: 0}
-  Player: {fileID: 0}
-  TargetCirclePrefab: {fileID: 0}
-  GrenadePoint: {fileID: 0}
-  ArcRenderer: {fileID: 0}
-  GrenadePrefab: {fileID: 0}
-  MinDistance: 1
-  MaxDistance: 6
-  ArcHeight: 2
+  Player: {fileID: 349624605360765276}
+  TargetCirclePrefab: {fileID: 707275166200485601, guid: dc5ce39ba776b4048b0c99c3cf742227, type: 3}
+  GrenadePoint: {fileID: 7729776909860747890}
+  ArcRenderer: {fileID: 6355894081141761132}
+  GrenadePrefab: {fileID: 370431208030112375, guid: 43d409f187d359a41933bc4142b43b36, type: 3}
+  MinDistance: 10
+  MaxDistance: 20
+  ArcHeight: 10
   ArcPoints: 30
 --- !u!114 &2010624187772929065
 MonoBehaviour:
@@ -546,14 +563,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b8d69c76cf85c47ae03c539f33faa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 0}
+  stats: {fileID: 11400000, guid: 353c64b7fb04ea44781b4743a1a35094, type: 2}
   difficulty: 0
-  onDeath:
+  manualMaxHealth: 10
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7366333500188378891}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
-  onHealthChanged:
-    m_PersistentCalls:
-      m_Calls: []
+--- !u!114 &7726766517034950423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366333500188378891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628aed1c3ce4ce345b9da8550e118b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 5
+  Joystick: {fileID: 0}
+  Rb: {fileID: 3427041021469579169}
+  PlayerRoll: {fileID: 59011298132736476}
+--- !u!114 &884833806685452161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366333500188378891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d815338f3efd3049bb09f1dbf7c8688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirePoint: {fileID: 7039745181856366552}
+  BulletPrefab: {fileID: 3012808492320493129, guid: 41d4343565d1f2b4cbb614ffa55564cd, type: 3}
+  BulletSpeed: 10
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  FireRate: 1
+  AimCircle: {fileID: 3802392115658801176}
+  PlayerRoll: {fileID: 59011298132736476}
+  MinShootRadius: 5.1
+  shooterCollider: {fileID: 7214648159652955718}
+--- !u!114 &59011298132736476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366333500188378891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 830abc9707d7bd24d88147465d7c99db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RollForce: 20
+  RollDuration: 1
+  Joystick: {fileID: 0}
+  Rb: {fileID: 3427041021469579169}
 --- !u!1 &7743711069800445413
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +726,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 8df097691f113374586fd3355f27b7bf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

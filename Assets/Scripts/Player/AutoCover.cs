@@ -3,16 +3,25 @@ using UnityEngine;
 public class AutoCover : MonoBehaviour
 {
     public CircleDrawer overCircle;
-    public FloatingJoystick Joystick;
+    public MonoBehaviour inputProvider;
     public LayerMask overLayer;
     public float HideDistance = 1.2f;
     public float MoveSpeed = 3f;
     public float JoystickThreshold = 0.05f;
     public PlayerRoll PlayerRoll;
 
+    private IPlayerInput InputProvider;
     private Transform targetCover;
     private bool isMovingToCover = false;
 
+    void Awake()
+    {
+        InputProvider = inputProvider as IPlayerInput;
+        if (InputProvider == null)
+        {
+            Debug.LogError("Assigned inputProvider does not implement IPlayerInput!");
+        }
+    }
     void Update()
     {
         if (PlayerRoll.IsRolling())
@@ -23,7 +32,8 @@ public class AutoCover : MonoBehaviour
 
         float radius = overCircle.Radius;
 
-        bool isIdle = Joystick.Direction.magnitude < JoystickThreshold;
+        Vector2 inputDirection = InputProvider.GetMovementInput();
+        bool isIdle = inputDirection.magnitude < JoystickThreshold;
 
         if (isIdle)
         {
