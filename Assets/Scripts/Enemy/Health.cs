@@ -6,9 +6,11 @@ public class Health : MonoBehaviour
     public EnemyStats stats;
     public Difficulty difficulty = Difficulty.Easy;
     public int manualMaxHealth = 10;
+    public int manualScore = 10;
 
     private int maxHealth;
     private int currentHealth;
+    private int score;
 
     public UnityEvent OnDeath;
     public UnityEvent<float> OnHealthChanged;
@@ -18,9 +20,15 @@ public class Health : MonoBehaviour
     void Start()
     {
         if (stats != null)
+        {
             maxHealth = stats.GetHealthByDifficulty(difficulty);
+            score = stats.GetScoreByDifficulty(difficulty);
+        }
         else
+        {
             maxHealth = manualMaxHealth;
+            score = manualScore;
+        }
 
         currentHealth = maxHealth;
 
@@ -38,6 +46,7 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            GameManager.Instance.AddScore(score);
             OnDeath?.Invoke();
         }
     }
