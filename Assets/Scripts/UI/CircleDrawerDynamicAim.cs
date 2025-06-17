@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class CircleDrawerDynamicAim : MonoBehaviour
 {
-    public FloatingJoystick Joystick;
     public Transform Player;
     public PlayerRoll PlayerRoll;
+    public MonoBehaviour inputProvider;
+
+    private IPlayerInput InputProvider;
 
     public float MaxRadius = 10f;
     public float MinRadius = 5f;
@@ -15,6 +17,12 @@ public class CircleDrawerDynamicAim : MonoBehaviour
     private LineRenderer lineRenderer;
     public float currentRadius;
 
+    void Awake()
+    {
+        InputProvider = inputProvider as IPlayerInput;
+        if (InputProvider == null)
+            Debug.LogError("Assigned inputProvider does not implement IPlayerInput!");
+    }
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -29,7 +37,7 @@ public class CircleDrawerDynamicAim : MonoBehaviour
     void Update()
     {
         bool isRolling = PlayerRoll.IsRolling();
-        bool isMoving = Joystick.Direction.magnitude > 0.05f;
+        bool isMoving = InputProvider.GetMovementInput().magnitude > 0.05f;
 
         float targetRadius;
 
