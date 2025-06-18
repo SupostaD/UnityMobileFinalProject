@@ -2620,30 +2620,9 @@ MonoBehaviour:
     m_Bits: 8
   FireRate: 1
   AimCircle: {fileID: 2057473516}
-  PlayerRoll: {fileID: 1602048593}
+  PlayerRoll: {fileID: 1802922781244907170}
   MinShootRadius: 5.1
   shooterCollider: {fileID: 1802922781244907169}
---- !u!54 &1602048588 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 3427041021469579169, guid: e2357efd994712a4fa16339adf694491, type: 3}
-  m_PrefabInstance: {fileID: 1802922781244907168}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1602048593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1602048581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 830abc9707d7bd24d88147465d7c99db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RollForce: 20
-  RollDuration: 1
-  Rb: {fileID: 1602048588}
-  ControllScheme: {fileID: 9097068459569607260}
 --- !u!114 &1602048594 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
@@ -3723,7 +3702,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1602048593}
+      - m_Target: {fileID: 1802922781244907170}
         m_TargetAssemblyTypeName: PlayerRoll, Assembly-CSharp
         m_MethodName: TriggerRoll
         m_Mode: 1
@@ -4389,7 +4368,7 @@ PrefabInstance:
     - target: {fileID: 738029495251517565, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: PlayerRoll
       value: 
-      objectReference: {fileID: 1602048593}
+      objectReference: {fileID: 1802922781244907170}
     - target: {fileID: 738029495251517565, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: HideDistance
       value: 3
@@ -4465,7 +4444,7 @@ PrefabInstance:
     - target: {fileID: 3802392115658801176, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: PlayerRoll
       value: 
-      objectReference: {fileID: 1602048593}
+      objectReference: {fileID: 1802922781244907170}
     - target: {fileID: 3802392115658801176, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: ControllScheme
       value: 
@@ -4620,15 +4599,23 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7366333500188378891, guid: e2357efd994712a4fa16339adf694491, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1602048587}
-    - targetCorrespondingSourceObject: {fileID: 7366333500188378891, guid: e2357efd994712a4fa16339adf694491, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1602048593}
   m_SourcePrefab: {fileID: 100100000, guid: e2357efd994712a4fa16339adf694491, type: 3}
 --- !u!65 &1802922781244907169 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 7214648159652955718, guid: e2357efd994712a4fa16339adf694491, type: 3}
   m_PrefabInstance: {fileID: 1802922781244907168}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1802922781244907170 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 59011298132736476, guid: e2357efd994712a4fa16339adf694491, type: 3}
+  m_PrefabInstance: {fileID: 1802922781244907168}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602048581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 830abc9707d7bd24d88147465d7c99db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1850462411168713708
 MonoBehaviour:
   m_ObjectHideFlags: 0
