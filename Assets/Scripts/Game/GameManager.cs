@@ -37,6 +37,5 @@ public class GameManager : MonoBehaviour
     public void SetDifficulty(Difficulty difficultyName)
     {
         difficulty = difficultyName;
-        Debug.Log($"Выбрана сложность: {difficulty}");
     }
 }
