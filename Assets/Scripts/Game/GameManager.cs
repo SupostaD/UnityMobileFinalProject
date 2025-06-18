@@ -7,9 +7,11 @@ public class GameManager : MonoBehaviour
 
     private float elapsedTime;
     private int score;
+    private Difficulty difficulty = Difficulty.Easy;
 
     public int Score => score;
     public float ElapsedTime => elapsedTime;
+    public Difficulty CurrentDifficulty => difficulty;
 
     private void Awake()
     {
@@ -30,5 +32,11 @@ public class GameManager : MonoBehaviour
     {
         score += amount;
         UIManager.Instance.UpdateScore(score);
+    }
+    
+    public void SetDifficulty(Difficulty difficultyName)
+    {
+        difficulty = difficultyName;
+        Debug.Log($"Выбрана сложность: {difficulty}");
     }
 }
