@@ -4,7 +4,7 @@ public class CircleDrawerDynamicAim : MonoBehaviour
 {
     public Transform Player;
     public PlayerRoll PlayerRoll;
-    public MonoBehaviour inputProvider;
+    public ControllSchemePlayerManager ControllScheme;
 
     private IPlayerInput InputProvider;
 
@@ -16,15 +16,11 @@ public class CircleDrawerDynamicAim : MonoBehaviour
 
     private LineRenderer lineRenderer;
     public float currentRadius;
-
-    void Awake()
-    {
-        InputProvider = inputProvider as IPlayerInput;
-        if (InputProvider == null)
-            Debug.LogError("Assigned inputProvider does not implement IPlayerInput!");
-    }
+    
     void Start()
     {
+        InputProvider = ControllScheme.PlayerInput;
+        
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.loop = true;
         lineRenderer.useWorldSpace = false;

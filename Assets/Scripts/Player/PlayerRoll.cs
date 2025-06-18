@@ -5,21 +5,17 @@ public class PlayerRoll : MonoBehaviour
 {
     public float RollForce = 10f;
     public float RollDuration = 0.4f;
-    public MonoBehaviour inputProvider;
     public Rigidbody Rb;
+    public ControllSchemePlayerManager ControllScheme;
 
     private IPlayerInput InputProvider;
     private bool isRolling = false;
     private Vector3 rollDirection;
     private float rollTimer;
 
-    private void Awake()
+    private void Start()
     {
-        InputProvider = inputProvider as IPlayerInput;
-        if (InputProvider == null)
-        {
-            Debug.LogError("Assigned inputProvider does not implement IPlayerInput!");
-        }
+        InputProvider = ControllScheme.PlayerInput;
     }
     void Update()
     {

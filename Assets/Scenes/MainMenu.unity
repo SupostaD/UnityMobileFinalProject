@@ -204,7 +204,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1419657132}
         m_TargetAssemblyTypeName: DifficultySelectorUI, Assembly-CSharp
-        m_MethodName: OnEasyPressed
+        m_MethodName: SelectEasy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -786,7 +786,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1419657132}
         m_TargetAssemblyTypeName: DifficultySelectorUI, Assembly-CSharp
-        m_MethodName: OnMediumPressed
+        m_MethodName: SelectMedium
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3739,7 +3739,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1839003144}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1924761312}
+        m_TargetAssemblyTypeName: ControlSchemeSelectorUI, Assembly-CSharp
+        m_MethodName: SelectJoystick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1839003144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3778,6 +3790,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839003141}
   m_CullTransparentMesh: 1
+--- !u!1 &1924761311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1924761313}
+  - component: {fileID: 1924761312}
+  m_Layer: 0
+  m_Name: ControllSchemeSelector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1924761312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924761311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b55ca78a7627b04abb16dedac40573e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystickButton: {fileID: 1839003143}
+  buttonsButton: {fileID: 1951923499}
+  selectedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!4 &1924761313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924761311}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 527.8871, y: 258.28604, z: 25.70789}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1936718159
 GameObject:
   m_ObjectHideFlags: 0
@@ -4081,7 +4141,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1951923500}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1924761312}
+        m_TargetAssemblyTypeName: ControlSchemeSelectorUI, Assembly-CSharp
+        m_MethodName: SelectButtons
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1951923500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4643,7 +4715,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1419657132}
         m_TargetAssemblyTypeName: DifficultySelectorUI, Assembly-CSharp
-        m_MethodName: OnHardPressed
+        m_MethodName: SelectHard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4702,4 +4774,5 @@ SceneRoots:
   - {fileID: 114240513}
   - {fileID: 442440255}
   - {fileID: 1419657131}
+  - {fileID: 1924761313}
   - {fileID: 729482966}

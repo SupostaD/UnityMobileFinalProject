@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8170153791668043265, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
   m_PrefabInstance: {fileID: 443292270}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 443292271}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a47f546fc70ec8428172694e78e4288, type: 3}
@@ -1110,11 +1110,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floating Joystick
       objectReference: {fileID: 0}
+    - target: {fileID: 8170153791668043269, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+--- !u!1 &443292271 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8170153791668043269, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+  m_PrefabInstance: {fileID: 443292270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &560014012
 GameObject:
   m_ObjectHideFlags: 0
@@ -2591,22 +2600,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7366333500188378891, guid: e2357efd994712a4fa16339adf694491, type: 3}
   m_PrefabInstance: {fileID: 1802922781244907168}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1602048586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1602048581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 628aed1c3ce4ce345b9da8550e118b3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveSpeed: 5
-  Rb: {fileID: 1602048588}
-  PlayerRoll: {fileID: 1602048593}
-  inputProvider: {fileID: 7854191227635800216}
 --- !u!114 &1602048587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2649,8 +2642,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RollForce: 20
   RollDuration: 1
-  inputProvider: {fileID: 7854191227635800216}
   Rb: {fileID: 1602048588}
+  ControllScheme: {fileID: 9097068459569607260}
 --- !u!114 &1602048594 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
@@ -4321,6 +4314,10 @@ PrefabInstance:
       propertyPath: inputProvider
       value: 
       objectReference: {fileID: 7854191227635800216}
+    - target: {fileID: 59011298132736476, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: ControllScheme
+      value: 
+      objectReference: {fileID: 9097068459569607260}
     - target: {fileID: 349624605360765276, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -4410,6 +4407,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7854191227635800216}
     - target: {fileID: 738029495251517565, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: ControllScheme
+      value: 
+      objectReference: {fileID: 9097068459569607260}
+    - target: {fileID: 738029495251517565, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: "\u0421overLayer.m_Bits"
       value: 64
       objectReference: {fileID: 0}
@@ -4465,6 +4466,10 @@ PrefabInstance:
       propertyPath: PlayerRoll
       value: 
       objectReference: {fileID: 1602048593}
+    - target: {fileID: 3802392115658801176, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: ControllScheme
+      value: 
+      objectReference: {fileID: 9097068459569607260}
     - target: {fileID: 4544975489229814333, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: aimCircle
       value: 
@@ -4574,9 +4579,29 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7726766517034950423, guid: e2357efd994712a4fa16339adf694491, type: 3}
-      propertyPath: inputProvider
+      propertyPath: Buttons
+      value: 
+      objectReference: {fileID: 4996714319711476138}
+    - target: {fileID: 7726766517034950423, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: joystick
+      value: 
+      objectReference: {fileID: 6139961050632028880}
+    - target: {fileID: 7726766517034950423, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: buttonInput
       value: 
       objectReference: {fileID: 7854191227635800216}
+    - target: {fileID: 7726766517034950423, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: inputProvider
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726766517034950423, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: ControllScheme
+      value: 
+      objectReference: {fileID: 9097068459569607260}
+    - target: {fileID: 7726766517034950423, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: FloatingJoystck
+      value: 
+      objectReference: {fileID: 443292271}
     - target: {fileID: 8395948123821442086, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: Player
       value: 
@@ -4588,12 +4613,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4544975489229814333, guid: e2357efd994712a4fa16339adf694491, type: 3}
     - {fileID: 7132401780457301740, guid: e2357efd994712a4fa16339adf694491, type: 3}
+    - {fileID: 884833806685452161, guid: e2357efd994712a4fa16339adf694491, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7366333500188378891, guid: e2357efd994712a4fa16339adf694491, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1602048586}
     - targetCorrespondingSourceObject: {fileID: 7366333500188378891, guid: e2357efd994712a4fa16339adf694491, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1602048587}
@@ -4665,7 +4688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 488}
+  m_AnchoredPosition: {x: 0, y: 195.79}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &2285635254437631164
@@ -5003,6 +5026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9097068459569607259}
+  - component: {fileID: 9097068459569607260}
   m_Layer: 0
   m_Name: InputHandler
   m_TagString: Untagged
@@ -5040,7 +5064,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 304}
+  m_AnchoredPosition: {x: 0, y: 146.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!224 &5704460799305737125
@@ -5052,7 +5076,7 @@ RectTransform:
   m_GameObject: {fileID: 4996714319711476138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5403788432202754807}
@@ -5063,7 +5087,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 256, y: 51}
+  m_AnchoredPosition: {x: 94.6, y: -90.6}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5732863627695459949
@@ -5511,6 +5535,22 @@ Transform:
   - {fileID: 6086576192845123361}
   m_Father: {fileID: 2885370617129373051}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9097068459569607260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5433398646817654392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100302ac1671d8c46bd79e712b434113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FloatingJoystck: {fileID: 443292271}
+  Buttons: {fileID: 4996714319711476138}
+  joystick: {fileID: 6139961050632028880}
+  buttonInput: {fileID: 7854191227635800216}
 --- !u!114 &9180966703696986997
 MonoBehaviour:
   m_ObjectHideFlags: 0

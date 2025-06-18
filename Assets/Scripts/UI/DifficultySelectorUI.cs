@@ -7,33 +7,33 @@ public class DifficultySelectorUI : MonoBehaviour
     public Button mediumButton;
     public Button hardButton;
 
-    public Color selectedColor = Color.gray;
+    public Color selectedColor = Color.green;
     public Color defaultColor = Color.white;
 
     private void Start()
     {
-        UpdateButtonVisuals(GameManager.Instance.CurrentDifficulty);
+        UpdateVisual(GameManager.Instance.CurrentDifficulty);
     }
 
-    public void OnEasyPressed()
+    public void SelectEasy()
     {
         GameManager.Instance.SetDifficulty(Difficulty.Easy);
-        UpdateButtonVisuals(Difficulty.Easy);
+        UpdateVisual(Difficulty.Easy);
     }
 
-    public void OnMediumPressed()
+    public void SelectMedium()
     {
         GameManager.Instance.SetDifficulty(Difficulty.Medium);
-        UpdateButtonVisuals(Difficulty.Medium);
+        UpdateVisual(Difficulty.Medium);
     }
 
-    public void OnHardPressed()
+    public void SelectHard()
     {
         GameManager.Instance.SetDifficulty(Difficulty.Hard);
-        UpdateButtonVisuals(Difficulty.Hard);
+        UpdateVisual(Difficulty.Hard);
     }
 
-    private void UpdateButtonVisuals(Difficulty selected)
+    private void UpdateVisual(Difficulty selected)
     {
         SetButtonColor(easyButton, selected == Difficulty.Easy);
         SetButtonColor(mediumButton, selected == Difficulty.Medium);

@@ -5,21 +5,15 @@ public class PlayerMovement : MonoBehaviour
     public float MoveSpeed = 5f;
     public Rigidbody Rb;
     public PlayerRoll PlayerRoll;
-    
-    public MonoBehaviour inputProvider;
+    public ControllSchemePlayerManager ControllScheme;
     private IPlayerInput playerInput;
-
     private Vector3 moveDirection;
 
-    private void Awake()
+    private void Start()
     {
-        playerInput = inputProvider as IPlayerInput;
-        if (playerInput == null)
-        {
-            Debug.LogError("Input Provider does not implement IPlayerInput");
-        }
+        playerInput = ControllScheme.PlayerInput;
     }
-    
+
     void Update()
     {
         if (PlayerRoll.IsRolling())
