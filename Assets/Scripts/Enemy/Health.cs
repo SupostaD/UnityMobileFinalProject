@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -53,6 +54,17 @@ public class Health : MonoBehaviour
         foreach (var ui in uiElements)
         {
             ui.UpdateUI(normalized);
+        }
+    }
+    
+    public void SetHealth(int value)
+    {
+        currentHealth = Mathf.Clamp(value, 0, maxHealth);
+        UpdateAllUI();
+
+        if (currentHealth <= 0)
+        {
+            OnDeath?.Invoke();
         }
     }
 }
