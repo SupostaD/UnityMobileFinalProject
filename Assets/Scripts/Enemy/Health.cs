@@ -4,12 +4,8 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     public EnemyStats stats;
-    public Difficulty difficulty = Difficulty.Easy;
-    public int manualMaxHealth = 10;
-    public int manualScore = 10;
-
     private int maxHealth;
-    private int currentHealth;
+    public int currentHealth;
     private int score;
 
     public UnityEvent OnDeath;
@@ -19,16 +15,14 @@ public class Health : MonoBehaviour
 
     void Start()
     {
-        if (stats != null)
-        {
+        var difficulty = GameManager.Instance.CurrentDifficulty;
+
+        if (gameObject.CompareTag("Player"))
+            maxHealth = 100;
+        else if (gameObject.CompareTag("Enemy"))
             maxHealth = stats.GetHealthByDifficulty(difficulty);
-            score = stats.GetScoreByDifficulty(difficulty);
-        }
-        else
-        {
-            maxHealth = manualMaxHealth;
-            score = manualScore;
-        }
+
+        score = stats.GetScoreByDifficulty(difficulty);
 
         currentHealth = maxHealth;
 

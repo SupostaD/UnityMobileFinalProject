@@ -3,24 +3,20 @@ using UnityEngine;
 public class AutoCover : MonoBehaviour
 {
     public CircleDrawer overCircle;
-    public MonoBehaviour inputProvider;
     public LayerMask overLayer;
     public float HideDistance = 1.2f;
     public float MoveSpeed = 3f;
     public float JoystickThreshold = 0.05f;
     public PlayerRoll PlayerRoll;
+    public ControllSchemePlayerManager ControllScheme;
 
     private IPlayerInput InputProvider;
     private Transform targetCover;
     private bool isMovingToCover = false;
 
-    void Awake()
+    void Start()
     {
-        InputProvider = inputProvider as IPlayerInput;
-        if (InputProvider == null)
-        {
-            Debug.LogError("Assigned inputProvider does not implement IPlayerInput!");
-        }
+        InputProvider = ControllScheme.PlayerInput;
     }
     void Update()
     {

@@ -7,9 +7,14 @@ public class GameManager : MonoBehaviour
 
     private float elapsedTime;
     private int score;
+    private Difficulty difficulty = Difficulty.Easy;
+    private ControlScheme controlScheme = ControlScheme.Joystick;
 
     public int Score => score;
     public float ElapsedTime => elapsedTime;
+    public Difficulty CurrentDifficulty => difficulty;
+    public ControlScheme CurrentControlScheme => controlScheme;
+
 
     private void Awake()
     {
@@ -31,4 +36,21 @@ public class GameManager : MonoBehaviour
         score += amount;
         UIManager.Instance.UpdateScore(score);
     }
+    
+    public void SetDifficulty(Difficulty difficultySet)
+    {
+        difficulty = difficultySet;
+    }
+    
+    public void SetControlScheme(ControlScheme scheme)
+    {
+        controlScheme = scheme;
+        Debug.Log($"Схема управления: {controlScheme}");
+    }
+}
+
+public enum ControlScheme
+{
+    Joystick,
+    Buttons
 }
