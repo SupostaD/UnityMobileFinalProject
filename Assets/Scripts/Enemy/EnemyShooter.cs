@@ -9,6 +9,7 @@ public class EnemyShooter : MonoBehaviour
     public float ShootRadius = 5f;
     public LayerMask PlayerLayer;
     public Collider shooterCollider;
+    public Animator animator;
 
     private float fireCooldown;
 
@@ -26,6 +27,7 @@ public class EnemyShooter : MonoBehaviour
                 ShootAtPlayer();
             }
         }
+        else animator.SetBool("isShooting", false);
     }
 
     void ShootAtPlayer()
@@ -64,6 +66,7 @@ public class EnemyShooter : MonoBehaviour
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
+            animator.SetBool("isShooting", true);
             rb.linearVelocity = dir * BulletSpeed;
         }
     }
