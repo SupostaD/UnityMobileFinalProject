@@ -9,6 +9,7 @@ public class AutoCover : MonoBehaviour
     public float JoystickThreshold = 0.05f;
     public PlayerRoll PlayerRoll;
     public ControllSchemePlayerManager ControllScheme;
+    public Animator animator;
 
     private IPlayerInput InputProvider;
     private Transform targetCover;
@@ -55,11 +56,13 @@ public class AutoCover : MonoBehaviour
             Vector3 directionAwayFromCover = (transform.position - targetCover.position).normalized;
             Vector3 targetPosition = targetCover.position + directionAwayFromCover * HideDistance;
 
+            animator.SetBool("isRunning", true);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, MoveSpeed * Time.deltaTime);
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
                 isMovingToCover = false;
+                animator.SetBool("isRunning", false);
             }
         }
     }

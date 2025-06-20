@@ -39,9 +39,13 @@ public class Health : MonoBehaviour
 
         UpdateAllUI();
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && gameObject.CompareTag("Enemy"))
         {
             GameManager.Instance.AddScore(score);
+            OnDeath?.Invoke();
+        }
+        else if (currentHealth <= 0 && gameObject.CompareTag("Player"))
+        {
             OnDeath?.Invoke();
         }
     }

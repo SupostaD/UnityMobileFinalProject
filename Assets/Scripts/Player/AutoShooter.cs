@@ -11,6 +11,7 @@ public class AutoShooter : MonoBehaviour
     public PlayerRoll PlayerRoll;
     public float MinShootRadius = 5.1f;
     public Collider shooterCollider;
+    public Animator animator;
 
     private float fireCooldown;
 
@@ -89,6 +90,9 @@ public class AutoShooter : MonoBehaviour
         }
         
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        
+        animator.SetBool("isShooting", true);
+        
         rb.linearVelocity = dir * BulletSpeed;
     }
 }
