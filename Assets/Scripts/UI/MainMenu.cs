@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
         {
             warningText.text = "";
             GameManager.Instance.SetPlayerName(enteredName);
-            SceneManager.LoadScene("MaksimScene");
+            SceneManager.LoadScene("MainScene");
         }
     }
 

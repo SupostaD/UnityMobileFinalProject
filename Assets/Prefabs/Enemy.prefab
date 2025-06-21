@@ -52,7 +52,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -81,7 +81,7 @@ MonoBehaviour:
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 128
-  shooterCollider: {fileID: 0}
+  shooterCollider: {fileID: 5885812709160215436}
   animator: {fileID: 541144035308945716}
 --- !u!114 &-1335500669706726009
 MonoBehaviour:
