@@ -12,4 +12,5 @@ public class SaveData
     public int playerHP;
     public List<EnemyData> enemies;
     public float elapsedTime;
+    public string nameScene;
 }
