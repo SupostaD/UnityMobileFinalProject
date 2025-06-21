@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveLoadController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class SaveLoadController : MonoBehaviour
         data.playerPosition = player.transform.position;
         data.playerHP = player.GetComponent<Health>().currentHealth;
         data.elapsedTime = GameManager.Instance.ElapsedTime;
+        data.nameScene = SceneManager.GetActiveScene().name;
 
         data.enemies = new List<EnemyData>();
         foreach (var enemy in FindObjectsOfType<Enemy>())
@@ -41,23 +43,8 @@ public class SaveLoadController : MonoBehaviour
         string json = File.ReadAllText(path);
         SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-        GameManager.Instance.SetPlayerName(data.playerName);
-        GameManager.Instance.SetDifficulty((Difficulty)Enum.Parse(typeof(Difficulty), data.difficulty));
-        GameManager.Instance.SetControlScheme((ControlScheme)Enum.Parse(typeof(ControlScheme), data.controlScheme));
-        GameManager.Instance.SetScore(data.score);
-        
-        var player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = data.playerPosition;
-        player.GetComponent<Health>().currentHealth = data.playerHP;
+        GameManager.Instance.SetPendingLoadData(data);
 
-        foreach (var enemy in data.enemies)
-        {
-            Enemy found = Enemy.FindById(enemy.enemyId);
-            if (found != null)
-            {
-                found.transform.position = enemy.position;
-                found.GetComponent<Health>().SetHealth(enemy.hp);;
-            }
-        }
+        SceneManager.LoadScene(data.nameScene);
     }
 }

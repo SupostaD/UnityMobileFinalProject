@@ -10,12 +10,17 @@ public class GameManager : MonoBehaviour
     private int score;
     private Difficulty difficulty = Difficulty.Easy;
     private ControlScheme controlScheme = ControlScheme.Joystick;
+    private SaveData pendingLoadData;
+    
+    public event Action<ControlScheme> OnControlSchemeChanged;
 
     public int Score => score;
     public float ElapsedTime => elapsedTime;
     public Difficulty CurrentDifficulty => difficulty;
     public ControlScheme CurrentControlScheme => controlScheme;
     public string PlayerName => playerName;
+    public SaveData PendingLoadData => pendingLoadData;
+
 
 
     private void Awake()
@@ -32,6 +37,12 @@ public class GameManager : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
     }
+    
+    public void SetControlScheme(ControlScheme scheme)
+    {
+        controlScheme = scheme;
+        OnControlSchemeChanged?.Invoke(controlScheme);
+    }
 
     public void AddScore(int amount)
     {
@@ -43,11 +54,6 @@ public class GameManager : MonoBehaviour
     {
         difficulty = difficultySet;
     }
-    
-    public void SetControlScheme(ControlScheme scheme)
-    {
-        controlScheme = scheme;
-    }
 
     public void SetPlayerName(string name)
     {
@@ -58,6 +64,16 @@ public class GameManager : MonoBehaviour
     public void SetScore(int newScore)
     {
         score = newScore;
+    }
+
+    public void SetElapsedTime(float newElapsedTime)
+    {
+        elapsedTime = newElapsedTime;
+    }
+    
+    public void SetPendingLoadData(SaveData data)
+    {
+        pendingLoadData = data;
     }
 }
 

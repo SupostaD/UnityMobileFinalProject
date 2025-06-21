@@ -8,10 +8,20 @@ public class ControllSchemePlayerManager : MonoBehaviour
     public JoystickInput joystick;
     public ButtonInput buttonInput;
     
-    private void Awake()
+    private void OnEnable()
     {
-        var scheme = GameManager.Instance.CurrentControlScheme;
+        GameManager.Instance.OnControlSchemeChanged += ApplyControlScheme;
+        ApplyControlScheme(GameManager.Instance.CurrentControlScheme);
+    }
 
+    private void OnDisable()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnControlSchemeChanged -= ApplyControlScheme;
+    }
+
+    private void ApplyControlScheme(ControlScheme scheme)
+    {
         if (scheme == ControlScheme.Joystick)
         {
             FloatingJoystck.SetActive(true);
