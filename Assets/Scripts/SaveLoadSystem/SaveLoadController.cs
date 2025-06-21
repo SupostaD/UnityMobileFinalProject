@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class SaveLoadController : MonoBehaviour
 {
-    public ControllSchemePlayerManager controllSchemePlayerManager;
     public void SaveGame(string saveFileName)
     {
         SaveData data = new SaveData();
