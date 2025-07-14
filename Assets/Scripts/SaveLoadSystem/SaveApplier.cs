@@ -19,11 +19,10 @@ public class SaveApplier : MonoBehaviour
 
         foreach (var enemyData in data.enemies)
         {
-            Enemy enemy = Enemy.FindById(enemyData.enemyId);
+            Enemy enemy = Enemy.FindById(enemyData.EnemyId);
             if (enemy != null)
             {
-                enemy.transform.position = enemyData.position;
-                enemy.GetComponent<Health>().SetHealth(enemyData.hp);
+                enemy.ApplySaveData(enemyData);
             }
         }
 

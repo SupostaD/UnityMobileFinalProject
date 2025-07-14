@@ -9,6 +9,11 @@ public class Enemy : MonoBehaviour
     public string ID => uniqueId;
     public int CurrentHP => health != null ? health.currentHealth : 0;
 
+    private void Awake()
+    {
+        health = GetComponent<Health>();
+    }
+    
     private void Start()
     {
         if (string.IsNullOrEmpty(uniqueId))
@@ -16,6 +21,11 @@ public class Enemy : MonoBehaviour
         
         health = GetComponent<Health>();
    }
+    
+    public void SetId(string id)
+    {
+        uniqueId = id;
+    }
     
     public static Enemy FindById(string id)
     {
@@ -25,5 +35,11 @@ public class Enemy : MonoBehaviour
                 return enemy;
         }
         return null;
+    }
+    
+    public void ApplySaveData(EnemyData data)
+    {
+        transform.position = data.Position;
+        health.currentHealth = data.Hp;
     }
 }

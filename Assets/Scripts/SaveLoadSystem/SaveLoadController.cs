@@ -24,11 +24,17 @@ public class SaveLoadController : MonoBehaviour
         {
             EnemyData e = new EnemyData
             {
-                enemyId = enemy.ID,
-                position = enemy.transform.position,
-                hp = enemy.CurrentHP
+                EnemyId = enemy.ID,
+                Position = enemy.transform.position,
+                Hp = enemy.CurrentHP
             };
             data.enemies.Add(e);
+        }
+        
+        data.bullets = new List<BulletSaveData>();
+        foreach (var bullet in FindObjectsOfType<BulletMovement>())
+        {
+            data.bullets.Add(bullet.GetSaveData());
         }
         
         string json = JsonUtility.ToJson(data, true);

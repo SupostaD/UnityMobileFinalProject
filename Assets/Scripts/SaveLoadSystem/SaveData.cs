@@ -13,4 +13,5 @@ public class SaveData
     public List<EnemyData> enemies;
     public float elapsedTime;
     public string nameScene;
+    public List<BulletSaveData> bullets;
 }

@@ -4,6 +4,7 @@ public class BulletMovement : MonoBehaviour
 {
     public float LifeTime = 3f;
     public int Damage = 1;
+    public 
 
     void Start()
     {
@@ -23,4 +24,20 @@ public class BulletMovement : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
+    public BulletSaveData GetSaveData()
+    {
+        return new BulletSaveData
+        {
+            position = transform.position,
+            rotation = transform.rotation
+        };
+    }
+}
+
+[System.Serializable]
+public struct BulletSaveData
+{
+    public Vector3 position;
+    public Quaternion rotation;
 }
