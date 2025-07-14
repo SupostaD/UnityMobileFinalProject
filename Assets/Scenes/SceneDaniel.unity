@@ -162,7 +162,7 @@ PrefabInstance:
     - target: {fileID: 4280011068956294652, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: shooterCollider
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 15582093}
     - target: {fileID: 4476907551222432202, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -216,6 +216,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
+--- !u!136 &15582093 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 5885812709160215436, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
+  m_PrefabInstance: {fileID: 15582092}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &37616811
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,6 +295,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 37616811}
+  m_CullTransparentMesh: 1
+--- !u!1 &156594192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 156594193}
+  - component: {fileID: 156594195}
+  - component: {fileID: 156594194}
+  m_Layer: 0
+  m_Name: ReloadImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &156594193
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156594192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3697003289742556499}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 312.4, y: 44.8}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &156594194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156594192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8ca674a27676e6640be159cfaf75e542, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &156594195
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156594192}
   m_CullTransparentMesh: 1
 --- !u!1 &406362485
 GameObject:
@@ -798,17 +878,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FirePoint: {fileID: 2113788579}
-  BulletPrefab: {fileID: 3012808492320493129, guid: 41d4343565d1f2b4cbb614ffa55564cd, type: 3}
   BulletSpeed: 10
+  FireRate: 1
+  MinShootRadius: 5.1
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  FireRate: 1
-  AimCircle: {fileID: 2057473516}
-  PlayerRoll: {fileID: 1602048593}
-  MinShootRadius: 5.1
   shooterCollider: {fileID: 1802922781244907170}
   animator: {fileID: 1802922781244907169}
+  MaxBullets: 5
+  ReloadDuration: 7
+  ReloadFillImage: {fileID: 156594194}
+  MagazineSprites:
+  - {fileID: 21300000, guid: c426af1f3a65e6f42aeef9a20d793097, type: 3}
+  - {fileID: 21300000, guid: b9671df78ee8fb54da305441ac3ae7ee, type: 3}
+  - {fileID: 21300000, guid: 4420337ff65e3df4e91a77d57ce7e75c, type: 3}
+  - {fileID: 21300000, guid: 075102be637c4484c9a77cb66cf0ca42, type: 3}
+  - {fileID: 21300000, guid: 857a8a42716680041ab0ecc8d80039ea, type: 3}
+  - {fileID: 21300000, guid: 8ca674a27676e6640be159cfaf75e542, type: 3}
+  AimCircle: {fileID: 2057473516}
+  PlayerRoll: {fileID: 1602048593}
 --- !u!54 &1602048588 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 3427041021469579169, guid: e2357efd994712a4fa16339adf694491, type: 3}
@@ -948,7 +1037,7 @@ PrefabInstance:
     - target: {fileID: 4280011068956294652, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: shooterCollider
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2115971304}
     - target: {fileID: 4476907551222432202, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -1002,6 +1091,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
+--- !u!136 &2115971304 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 5885812709160215436, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
+  m_PrefabInstance: {fileID: 2115971303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &95757453642405429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2518,6 +2612,7 @@ PrefabInstance:
     - {fileID: 1793098931237775553, guid: e2357efd994712a4fa16339adf694491, type: 3}
     - {fileID: 7726766517034950423, guid: e2357efd994712a4fa16339adf694491, type: 3}
     - {fileID: 59011298132736476, guid: e2357efd994712a4fa16339adf694491, type: 3}
+    - {fileID: 3976105871552858505, guid: e2357efd994712a4fa16339adf694491, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -3451,6 +3546,7 @@ RectTransform:
   - {fileID: 700933574066740089}
   - {fileID: 6363576719414885740}
   - {fileID: 4529729854263167519}
+  - {fileID: 156594193}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
