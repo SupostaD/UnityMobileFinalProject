@@ -830,6 +830,8 @@ MonoBehaviour:
   RollDuration: 1
   Rb: {fileID: 1602048588}
   ControllScheme: {fileID: 1257639839969740147}
+  rollCooldown: 2
+  ButtonImage: {fileID: 5714717291706109769}
 --- !u!114 &1602048594 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7154593231112729846, guid: e2357efd994712a4fa16339adf694491, type: 3}
@@ -4595,7 +4597,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: abebfff2ee952fb49927143307de0768, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
