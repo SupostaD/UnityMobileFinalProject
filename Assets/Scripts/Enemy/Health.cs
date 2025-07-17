@@ -34,10 +34,16 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        currentHealth -= amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        if (DebugMenu.isGodMode && gameObject.CompareTag("Player"))
+            return;
+        
+        if (!DebugMenu.isGodMode || (DebugMenu.isGodMode && gameObject.CompareTag("Enemy")))
+        {
+            currentHealth -= amount;
+            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        UpdateAllUI();
+            UpdateAllUI();
+        }
 
         if (currentHealth <= 0 && gameObject.CompareTag("Enemy"))
         {
@@ -46,6 +52,7 @@ public class Health : MonoBehaviour
         }
         else if (currentHealth <= 0 && gameObject.CompareTag("Player"))
         {
+            
             OnDeath?.Invoke();
         }
     }
