@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using System.IO;
 
@@ -7,8 +8,15 @@ public class SaveSlotListUI : MonoBehaviour
     public Transform slotParent;
     public SaveLoadController saveLoader;
 
-    void Start()
+    void OnEnable()
     {
+        StartCoroutine(LoadSlotsDelayed());
+    }
+
+    IEnumerator LoadSlotsDelayed()
+    {
+        yield return null;
+        yield return null; // второй кадр — нужен обязательно
         LoadAllSlots();
     }
 

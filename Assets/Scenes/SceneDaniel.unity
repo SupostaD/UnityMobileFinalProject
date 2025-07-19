@@ -1045,6 +1045,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  suppressSpawning: 0
 --- !u!4 &1959836639
 Transform:
   m_ObjectHideFlags: 0
@@ -2381,6 +2382,10 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2010624187772929065, guid: e2357efd994712a4fa16339adf694491, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2010624187772929065, guid: e2357efd994712a4fa16339adf694491, type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 0
       objectReference: {fileID: 0}
@@ -2901,18 +2906,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 669
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 10
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 0
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
+  m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
 --- !u!114 &2898949379783603726
 MonoBehaviour:
@@ -3562,7 +3567,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2990676267302345457}
-  - component: {fileID: 7709229461925288786}
   - component: {fileID: 2898905495051543031}
   - component: {fileID: 8774027652705450219}
   m_Layer: 5
@@ -3706,6 +3710,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066b9d4ec4e92f24e88796e7c5dcd1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletFromPlayerPrefab: {fileID: 3012808492320493129, guid: 41d4343565d1f2b4cbb614ffa55564cd, type: 3}
+  bulletFromEnemyPrefab: {fileID: 3012808492320493129, guid: 9ca9d0c0d22864a469f41e3ee1d4013f, type: 3}
+  enemyPrefab: {fileID: 54281057952729912, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
 --- !u!114 &4005693565176234079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5078,7 +5085,7 @@ MonoBehaviour:
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1188940313554312679}
   m_HorizontalScrollbarVisibility: 2
-  m_VerticalScrollbarVisibility: 2
+  m_VerticalScrollbarVisibility: 0
   m_HorizontalScrollbarSpacing: -3
   m_VerticalScrollbarSpacing: -3
   m_OnValueChanged:
@@ -5658,20 +5665,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7709229461925288786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721249172982376153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 0
 --- !u!114 &7714622015388616839
 MonoBehaviour:
   m_ObjectHideFlags: 0

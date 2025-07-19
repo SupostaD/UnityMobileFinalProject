@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 public class EnemyShooter : MonoBehaviour
 {
@@ -21,11 +22,11 @@ public class EnemyShooter : MonoBehaviour
             return;
         }
 
-        Transform closestPlayer = FindClosestTarget(playersInRange);
+        Transform? closestPlayer = FindClosestTarget(playersInRange);
 
         fireCooldown -= Time.deltaTime;
 
-        if (fireCooldown <= 0f)
+        if (fireCooldown <= 0f && closestPlayer != null)
         {
             fireCooldown = 1f / FireRate;
             ShootAtTarget(closestPlayer);
@@ -64,6 +65,7 @@ public class EnemyShooter : MonoBehaviour
         }
     }
 
+    [CanBeNull]
     Transform FindClosestTarget(Collider[] targets)
     {
         Transform closest = null;

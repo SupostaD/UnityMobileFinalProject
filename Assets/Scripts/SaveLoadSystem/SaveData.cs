@@ -9,9 +9,17 @@ public class SaveData
     public string controlScheme;
     public int score;
     public Vector3 playerPosition;
+    public Quaternion playerRotation;
     public int playerHP;
     public List<EnemyData> enemies;
     public float elapsedTime;
     public string nameScene;
-    public List<BulletSaveData> bullets;
+    public List<BulletSaveData> bulletsFromPlayer;
+    public List<BulletSaveData> bulletsFromEnemy;
+    public float weaponCooldown;     
+    public int bulletsInMagazine;    
+    public float rollCooldown;       
+    public float grenadeCooldown;
+    public bool hasActiveGrenade;
+    public GrenadeSaveData activeGrenade;
 }

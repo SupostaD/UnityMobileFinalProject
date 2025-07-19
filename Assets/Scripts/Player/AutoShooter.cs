@@ -21,6 +21,11 @@ public class AutoShooter : MonoBehaviour
     [Header("Refs")]
     public CircleDrawerDynamicAim AimCircle;
     public PlayerRoll PlayerRoll;
+    
+    public float GetCooldown() => fireCooldown;
+    public int GetBulletCount() => currentBullets;
+    public void SetCooldown(float value) => fireCooldown = value;
+    public void SetBulletCount(int value) => currentBullets = value;
 
     private float fireCooldown;
     private int currentBullets;

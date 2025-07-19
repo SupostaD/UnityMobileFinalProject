@@ -208,4 +208,31 @@ public class GrenadeThrower : MonoBehaviour
 
         isHoldingTouch = false;
     }
+    
+    public float GetCooldownGrenade()
+    {
+        float remaining = (lastThrowTime + grenadeCooldown) - Time.time;
+        return Mathf.Max(remaining, 0f);
+    }
+
+    public void SetCooldownGrenade(float value)
+    {
+        lastThrowTime = Time.time - (grenadeCooldown - value);
+        isOnCooldown = value > 0f;
+
+        if (isOnCooldown)
+        {
+            JoystickHandleObject.SetActive(false);
+            CooldownFillImage.raycastTarget = true;
+            JoystickBackground.fillAmount = 1f - value / grenadeCooldown;
+            CooldownFillImage.fillAmount = 1f - value / grenadeCooldown;
+        }
+        else
+        {
+            JoystickHandleObject.SetActive(true);
+            CooldownFillImage.raycastTarget = false;
+            JoystickBackground.fillAmount = 1f;
+            CooldownFillImage.fillAmount = 0f;
+        }
+    }
 }

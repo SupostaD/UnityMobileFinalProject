@@ -20,9 +20,7 @@ public class GameManager : MonoBehaviour
     public ControlScheme CurrentControlScheme => controlScheme;
     public string PlayerName => playerName;
     public SaveData PendingLoadData => pendingLoadData;
-
-
-
+    
     private void Awake()
     {
         if (Instance == null)

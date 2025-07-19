@@ -9,11 +9,15 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval = 3f;
     public LayerMask enemyLayer;
     public LayerMask playerLayer;
+    public bool suppressSpawning = false;
+
 
     private float spawnTimer;
 
     void Update()
     {
+        if (suppressSpawning) return;
+
         spawnTimer -= Time.deltaTime;
 
         if (spawnTimer <= 0f)
@@ -34,13 +38,7 @@ public class EnemySpawner : MonoBehaviour
 
             if (!hasEnemyNearby && !hasPlayerNearby)
             {
-                GameObject enemyGO = Instantiate(enemyPrefab, point.position, Quaternion.identity);
-
-                Enemy enemy = enemyGO.GetComponent<Enemy>();
-                if (enemy != null)
-                {
-                    enemy.SetId(System.Guid.NewGuid().ToString());
-                }
+                Instantiate(enemyPrefab, point.position, Quaternion.identity);
             }
         }
     }

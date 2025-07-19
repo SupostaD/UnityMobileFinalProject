@@ -15,6 +15,9 @@ public class PlayerRoll : MonoBehaviour
     
     [Header("UI")]
     public Image ButtonImage;
+    
+    public float GetCooldownRoll() => rollCooldown;
+    public void SetCooldownRoll(float value) => rollCooldown = value;
 
     private IPlayerInput InputProvider;
     private bool isRolling = false;

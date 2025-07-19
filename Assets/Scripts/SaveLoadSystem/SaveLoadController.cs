@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -13,9 +12,31 @@ public class SaveLoadController : MonoBehaviour
         data.difficulty = GameManager.Instance.CurrentDifficulty.ToString();
         data.controlScheme = GameManager.Instance.CurrentControlScheme.ToString();
         data.score = GameManager.Instance.Score;
+        
         var player = GameObject.FindGameObjectWithTag("Player");
         data.playerPosition = player.transform.position;
+        data.playerRotation = player.transform.rotation;
         data.playerHP = player.GetComponent<Health>().currentHealth;
+        
+        var roll = player.GetComponent<PlayerRoll>();
+        if (roll != null)
+        {
+            data.rollCooldown = roll.GetCooldownRoll();
+        }
+
+        var grenadeThrower = player.GetComponent<GrenadeThrower>();
+        if (grenadeThrower != null)
+        {
+            data.grenadeCooldown = grenadeThrower.GetCooldownGrenade();
+        }
+
+        var bulletsInMagazine = player.GetComponent<AutoShooter>();
+        if (bulletsInMagazine != null)
+        {
+            data.bulletsInMagazine = bulletsInMagazine.GetBulletCount();
+            data.weaponCooldown = bulletsInMagazine.GetCooldown();
+        }
+        
         data.elapsedTime = GameManager.Instance.ElapsedTime;
         data.nameScene = SceneManager.GetActiveScene().name;
 
@@ -24,17 +45,35 @@ public class SaveLoadController : MonoBehaviour
         {
             EnemyData e = new EnemyData
             {
-                EnemyId = enemy.ID,
                 Position = enemy.transform.position,
+                Rotation = enemy.transform.rotation,
                 Hp = enemy.CurrentHP
             };
             data.enemies.Add(e);
         }
         
-        data.bullets = new List<BulletSaveData>();
-        foreach (var bullet in FindObjectsOfType<BulletMovement>())
+        data.bulletsFromPlayer = new List<BulletSaveData>();
+        foreach (var bulletFromPlayer in FindObjectsOfType<BulletMovement>())
         {
-            data.bullets.Add(bullet.GetSaveData());
+            data.bulletsFromPlayer.Add(bulletFromPlayer.GetSaveData());
+        }
+        
+        data.bulletsFromEnemy = new List<BulletSaveData>();
+        foreach (var bulletFromEnemy in FindObjectsOfType<EnemyBullet>())
+        {
+            data.bulletsFromEnemy.Add(bulletFromEnemy.GetSaveData());
+        }
+
+        var grenade = FindFirstObjectByType<Grenade>();
+        if (grenade != null)
+        {
+            data.hasActiveGrenade = true;
+            data.activeGrenade = grenade.GetSaveData();
+            Debug.Log("Save grenade");
+        }
+        else
+        {
+            data.hasActiveGrenade = false;
         }
         
         string json = JsonUtility.ToJson(data, true);
