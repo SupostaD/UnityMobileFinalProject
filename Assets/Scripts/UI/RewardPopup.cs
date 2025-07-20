@@ -7,11 +7,7 @@ public class RewardPopup : MonoBehaviour
     public Sprite lockedGiftSprite;
     public Sprite normalGiftSprite;
     public Sprite openedGiftSprite;
-
-    /// <summary>
-    /// Обновляет отображение стрийка в попапе
-    /// </summary>
-    /// <param name="streakDay">От 1 до 7</param>
+    
     public void SetupVisuals(int streakDay)
     {
         for (int i = 0; i < giftImages.Length; i++)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,7 +34,7 @@ public class DailyRewardManager : MonoBehaviour
 
         if (AlreadyClaimedToday())
         {
-            Debug.Log("Награда уже получена сегодня.");
+            Debug.Log("The award has already been received today.");
             onRewardClaimed?.Invoke();
             return;
         }
@@ -66,12 +67,6 @@ public class DailyRewardManager : MonoBehaviour
 
     private void ShowRewardPopup()
     {
-        if (rewardPopupPrefab == null)
-        {
-            Debug.LogError("Reward Popup Prefab is not assigned!");
-            return;
-        }
-
         activePopup = Instantiate(rewardPopupPrefab);
         var ui = activePopup.GetComponent<RewardPopup>();
         ui.SetupVisuals(rewardData.streakDay);
@@ -88,12 +83,22 @@ public class DailyRewardManager : MonoBehaviour
         rewardData.streakDay = Mathf.Min(rewardData.streakDay + 1, 7);
 
         DailyRewardStorage.Save(rewardData);
+        
+        DamageMultiplierManager.IsDoubleDamageActive = true;
+        StartCoroutine(DisableDoubleDamageAfterSeconds(60));
 
-        Debug.Log($"Выдана награда. Стрик: {rewardData.streakDay}");
+        Debug.Log($"Awarded. Streak:{rewardData.streakDay}");
 
         if (activePopup != null)
             Destroy(activePopup);
 
         onRewardClaimed?.Invoke();
+    }
+    
+    private IEnumerator DisableDoubleDamageAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        DamageMultiplierManager.IsDoubleDamageActive = false;
+        Debug.Log("Double damage is over");
     }
 }

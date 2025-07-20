@@ -7,9 +7,8 @@ public class BulletMovement : BaseBullet
         if (other.CompareTag("Enemy"))
         {
             Health health = other.GetComponent<Health>();
-            if (health != null)
-                health.TakeDamage(Damage);
-
+            int finalDamage = DamageMultiplierManager.Apply(Damage);
+            health.TakeDamage(finalDamage);
             Destroy(gameObject);
         }
     }

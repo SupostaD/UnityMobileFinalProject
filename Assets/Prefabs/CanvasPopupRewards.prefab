@@ -1447,7 +1447,7 @@ MonoBehaviour:
   - {fileID: 4479341229379782333}
   lockedGiftSprite: {fileID: 21300000, guid: 8cbfd365c8c603d4a9a22e16cc072735, type: 3}
   normalGiftSprite: {fileID: 21300000, guid: aa4c1095ab5ad9a4aa833c9abf7b6888, type: 3}
-  openedGiftSprite: {fileID: 21300000, guid: 25f09fcefe3e2fc4d975b8f7004fb7e7, type: 3}
+  openedGiftSprite: {fileID: 21300000, guid: 41e9ee660dc1d7149bcc2529ee9a976e, type: 3}
 --- !u!1 &7401412944786255892
 GameObject:
   m_ObjectHideFlags: 0
