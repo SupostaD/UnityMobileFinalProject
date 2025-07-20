@@ -16,7 +16,7 @@ public class SaveSlotListUI : MonoBehaviour
     IEnumerator LoadSlotsDelayed()
     {
         yield return null;
-        yield return null; // второй кадр — нужен обязательно
+        yield return null;
         LoadAllSlots();
     }
 

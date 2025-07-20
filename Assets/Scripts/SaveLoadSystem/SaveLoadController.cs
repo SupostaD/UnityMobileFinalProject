@@ -18,6 +18,9 @@ public class SaveLoadController : MonoBehaviour
         data.playerRotation = player.transform.rotation;
         data.playerHP = player.GetComponent<Health>().currentHealth;
         
+        data.dailyRewardStreak = GameManager.Instance.DailyRewardStreak;
+        data.lastRewardClaimDate = GameManager.Instance.LastRewardClaimDate;
+        
         var roll = player.GetComponent<PlayerRoll>();
         if (roll != null)
         {
@@ -89,6 +92,8 @@ public class SaveLoadController : MonoBehaviour
         SaveData data = JsonUtility.FromJson<SaveData>(json);
 
         GameManager.Instance.SetPendingLoadData(data);
+        GameManager.Instance.DailyRewardStreak = data.dailyRewardStreak;
+        GameManager.Instance.LastRewardClaimDate = data.lastRewardClaimDate;
 
         SceneManager.LoadScene(data.nameScene);
     }

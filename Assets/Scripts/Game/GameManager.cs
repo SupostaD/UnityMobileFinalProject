@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public ControlScheme CurrentControlScheme => controlScheme;
     public string PlayerName => playerName;
     public SaveData PendingLoadData => pendingLoadData;
+    public int DailyRewardStreak { get; set; } = 1;
+    public string LastRewardClaimDate { get; set; } = "";
     
     private void Awake()
     {

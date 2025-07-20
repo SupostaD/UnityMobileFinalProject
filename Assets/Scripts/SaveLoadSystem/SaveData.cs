@@ -22,4 +22,6 @@ public class SaveData
     public float grenadeCooldown;
     public bool hasActiveGrenade;
     public GrenadeSaveData activeGrenade;
+    public int dailyRewardStreak = 1;
+    public string lastRewardClaimDate = "";
 }
