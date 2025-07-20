@@ -62,7 +62,7 @@ public class DailyRewardManager : MonoBehaviour
         if (string.IsNullOrEmpty(rewardData.lastClaimDate)) return true;
 
         DateTime lastClaim = DateTime.Parse(rewardData.lastClaimDate);
-        return (DateTime.Now - lastClaim).TotalMinutes >= 5; //.TotalMinutes >= 5 - для теста TotalHours >= 24 - для билда
+        return (DateTime.Now - lastClaim).TotalHours >= 24; //.TotalMinutes >= 5 - для теста TotalHours >= 24 - для билда
     }
 
     private void ShowRewardPopup()
