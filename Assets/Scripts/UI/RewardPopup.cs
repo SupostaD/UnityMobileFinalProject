@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,18 @@ public class RewardPopup : MonoBehaviour
             {
                 giftImages[i].sprite = lockedGiftSprite;
             }
+        }
+    }
+    
+    public IEnumerator AnimateButton(Button btn)
+    {
+        Vector3 original = btn.transform.localScale;
+        Vector3 target = original * 1.1f;
+
+        while (true)
+        {
+            btn.transform.localScale = Vector3.Lerp(original, target, Mathf.PingPong(Time.time * 2, 1));
+            yield return null;
         }
     }
 }

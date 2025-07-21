@@ -14,6 +14,7 @@ public class DailyRewardManager : MonoBehaviour
     private Action onRewardClaimed;
 
     private GameObject activePopup;
+    private Coroutine animationCoroutine;
 
     void Awake()
     {
@@ -72,6 +73,7 @@ public class DailyRewardManager : MonoBehaviour
         ui.SetupVisuals(rewardData.streakDay);
 
         Button claimButton = activePopup.GetComponentInChildren<Button>();
+        animationCoroutine = StartCoroutine(ui.AnimateButton(claimButton));
 
         claimButton.onClick.RemoveAllListeners();
         claimButton.onClick.AddListener(ClaimReward);
@@ -91,6 +93,8 @@ public class DailyRewardManager : MonoBehaviour
 
         if (activePopup != null)
             Destroy(activePopup);
+        
+        StopCoroutine(animationCoroutine);
 
         onRewardClaimed?.Invoke();
     }
