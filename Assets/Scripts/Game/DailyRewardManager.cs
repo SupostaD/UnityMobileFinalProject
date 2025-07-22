@@ -86,6 +86,11 @@ public class DailyRewardManager : MonoBehaviour
 
         DailyRewardStorage.Save(rewardData);
         
+        if (rewardData.streakDay >= 2)
+        {
+            AnalyticsManager.Instance?.LogAchievement("login_streak", rewardData.streakDay);
+        }
+        
         DamageMultiplierManager.IsDoubleDamageActive = true;
         StartCoroutine(DisableDoubleDamageAfterSeconds(60));
 
