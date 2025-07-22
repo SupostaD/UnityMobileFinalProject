@@ -60,6 +60,7 @@ public class EnemyShooter : MonoBehaviour
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
+            AudioManager.Instance.PlaySFX("Shoot");
             animator.SetBool("isShooting", true);
             rb.linearVelocity = dir * BulletSpeed;
         }

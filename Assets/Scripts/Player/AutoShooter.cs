@@ -77,6 +77,7 @@ public class AutoShooter : MonoBehaviour
         
         if (currentBullets <= 0)
         {
+            AudioManager.Instance.PlaySFX("Reload");
             StartReload();
         }
     }
@@ -109,7 +110,9 @@ public class AutoShooter : MonoBehaviour
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
             rb.linearVelocity = dir * BulletSpeed;
-
+        
+        AudioManager.Instance.PlaySFX("Shoot");
+        
         animator.SetBool("isShooting", true);
         
         fireCooldown = 1f / FireRate;

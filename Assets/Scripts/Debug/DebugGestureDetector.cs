@@ -56,12 +56,14 @@ public class DebugGestureDetector : MonoBehaviour
     {
         Time.timeScale = 0f;
         debugPanel.SetActive(true);
+        AudioManager.Instance.SetBGMVolume(0.5f);
     }
 
     public void HideDebugPanel()
     {
         Time.timeScale = 1f;
         debugPanel.SetActive(false);
+        AudioManager.Instance.SetBGMVolume(1f);
     }
 
     private bool IsInGameplay()

@@ -48,10 +48,12 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0 && gameObject.CompareTag("Enemy"))
         {
             GameManager.Instance.AddScore(score);
+            AudioManager.Instance.PlaySFX("Death");
             OnDeath?.Invoke();
         }
         else if (currentHealth <= 0 && gameObject.CompareTag("Player"))
         {
+            AudioManager.Instance.PlaySFX("Death");
             OnDeath?.Invoke();
         }
     }
