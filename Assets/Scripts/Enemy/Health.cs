@@ -52,7 +52,6 @@ public class Health : MonoBehaviour
         }
         else if (currentHealth <= 0 && gameObject.CompareTag("Player"))
         {
-            
             OnDeath?.Invoke();
         }
     }

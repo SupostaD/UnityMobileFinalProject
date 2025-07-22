@@ -1,7 +1,7 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class DebugGestureDetector : MonoBehaviour
 {
@@ -19,21 +19,24 @@ public class DebugGestureDetector : MonoBehaviour
     {
         if (!IsInGameplay()) return;
 
-#if UNITY_EDITOR || UNITY_STANDALONE
-        if (Input.GetMouseButtonDown(0))
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
         {
-            Vector2 tapPos = Input.mousePosition;
+            Vector2 tapPos = Touchscreen.current.primaryTouch.position.ReadValue();
+
             if (tapPos.x < Screen.width * 0.2f && tapPos.y > Screen.height * 0.8f)
+            {
                 RegisterTap();
+            }
         }
-#elif UNITY_ANDROID || UNITY_IOS
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
-            Vector2 tapPos = Input.GetTouch(0).position;
-            if (tapPos.x < Screen.width * 0.2f && tapPos.y > Screen.height * 0.8f)
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            if (mousePos.x < Screen.width * 0.2f && mousePos.y > Screen.height * 0.8f)
+            {
                 RegisterTap();
+            }
         }
-#endif
     }
 
     private void RegisterTap()
