@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using System.Text.RegularExpressions;
 
@@ -24,7 +23,7 @@ public class MainMenu : MonoBehaviour
             warningText.text = "";
             GameManager.Instance.SetPlayerName(enteredName);
             AnalyticsManager.Instance.StartSession();
-            SceneManager.LoadScene("SceneDaniel");
+            SceneTransitionManager.Instance.TransitionToScene("SceneDaniel");
         }
     }
 

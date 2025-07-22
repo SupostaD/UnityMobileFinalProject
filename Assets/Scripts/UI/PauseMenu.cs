@@ -20,12 +20,12 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneTransitionManager.Instance.TransitionToScene(SceneManager.GetActiveScene().name);
     }
 
     public void Exit()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        SceneTransitionManager.Instance.TransitionToScene("MainMenu");
     }
 }

@@ -95,6 +95,6 @@ public class SaveLoadController : MonoBehaviour
         GameManager.Instance.DailyRewardStreak = data.dailyRewardStreak;
         GameManager.Instance.LastRewardClaimDate = data.lastRewardClaimDate;
 
-        SceneManager.LoadScene(data.nameScene);
+        SceneTransitionManager.Instance.TransitionToScene(data.nameScene);
     }
 }
