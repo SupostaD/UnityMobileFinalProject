@@ -8,12 +8,34 @@ public class Grenade : MonoBehaviour
     public LayerMask EnemyLayer;
 
     private bool fuseStarted = false;
+    private float explodeTime;
 
     public void StartFuse()
     {
         if (fuseStarted) return;
         fuseStarted = true;
+        explodeTime = Time.time + Delay;
         Invoke(nameof(Explode), Delay);
+    }
+    
+    public GrenadeSaveData GetSaveData()
+    {
+        float remaining = Mathf.Max(explodeTime - Time.time, 0f);
+        return new GrenadeSaveData
+        {
+            position = transform.position,
+            velocity = GetComponent<Rigidbody>().linearVelocity,
+            remainingFuseTime = remaining
+        };
+    }
+    
+    public void ApplySaveData(GrenadeSaveData data)
+    {
+        transform.position = data.position;
+        GetComponent<Rigidbody>().linearVelocity = data.velocity;
+        fuseStarted = true;
+        explodeTime = Time.time + data.remainingFuseTime;
+        Invoke(nameof(Explode), data.remainingFuseTime);
     }
 
     void Explode()

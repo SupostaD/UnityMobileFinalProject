@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5885812709160215436}
   - component: {fileID: 4280011068956294652}
   - component: {fileID: -1335500669706726009}
+  - component: {fileID: -5549580617935148218}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 54281057952729912}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.71, y: 1.8, z: 10.752173}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 3.58, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -72,9 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 035a92327ea528d48847b95ea6fdaa5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   FirePoint: {fileID: 122506253317168474}
-  BulletPrefab: {fileID: 3012808492320493129, guid: 9ca9d0c0d22864a469f41e3ee1d4013f, type: 3}
   FireRate: 1
   BulletSpeed: 10
   ShootRadius: 20
@@ -114,7 +113,32 @@ MonoBehaviour:
         m_CallState: 2
   OnHealthChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-5549580617935148218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54281057952729912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec61ceda1cc1df4e88c13db2675237b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!1 &1346793808597552071
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +182,7 @@ GameObject:
   - component: {fileID: 8116321353725282423}
   - component: {fileID: 8838714732315807228}
   - component: {fileID: 6146784817719483351}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +284,7 @@ GameObject:
   - component: {fileID: 5808473473770737158}
   - component: {fileID: 5826736098343528525}
   - component: {fileID: 2792893815804704359}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

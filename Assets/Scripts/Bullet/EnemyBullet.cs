@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class EnemyBullet : BaseBullet
 {
-    public float LifeTime = 5f;
-    public int Damage = 1;
-
     void OnEnable()
     {
         CancelInvoke();
@@ -15,19 +12,18 @@ public class EnemyBullet : MonoBehaviour
     {
         EnemyBulletPool.Instance.ReturnBullet(gameObject);
     }
-    
+
     void OnCollisionEnter(Collision collision)
     {
         GameObject hitObject = collision.gameObject;
-        
+
         if (hitObject.CompareTag("Player"))
         {
             Health hp = collision.collider.GetComponent<Health>();
             if (hp != null)
                 hp.TakeDamage(Damage);
-
-            EnemyBulletPool.Instance.ReturnBullet(gameObject);
         }
-        else EnemyBulletPool.Instance.ReturnBullet(gameObject);
+
+        EnemyBulletPool.Instance.ReturnBullet(gameObject);
     }
 }

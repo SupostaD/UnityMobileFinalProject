@@ -62,15 +62,18 @@ public class Health : MonoBehaviour
         float normalized = (float)currentHealth / maxHealth;
         OnHealthChanged?.Invoke(normalized);
 
-        foreach (var ui in uiElements)
+        if (uiElements != null)
         {
-            ui.UpdateUI(normalized);
+            foreach (var ui in uiElements)
+            {
+                ui.UpdateUI(normalized);
+            }   
         }
     }
     
     public void SetHealth(int value)
     {
-        currentHealth = Mathf.Clamp(value, 0, maxHealth);
+        currentHealth = value;
         UpdateAllUI();
 
         if (currentHealth <= 0)

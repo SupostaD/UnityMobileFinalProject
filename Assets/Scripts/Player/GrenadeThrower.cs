@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GrenadeThrower : MonoBehaviour
 {
@@ -16,6 +17,16 @@ public class GrenadeThrower : MonoBehaviour
     public float MaxDistance = 6f;
     public float ArcHeight = 2f;
     public int ArcPoints = 30;
+    
+    [Header("Cooldown Settings")]
+    public float grenadeCooldown = 2f;
+    private float lastThrowTime = -Mathf.Infinity;
+    private bool isOnCooldown = false;
+    
+    [Header("UI")]
+    public Image JoystickBackground;
+    public Image CooldownFillImage;
+    public GameObject JoystickHandleObject;
 
     private GameObject currentCircle;
     private GameObject heldGrenade;
@@ -52,10 +63,32 @@ public class GrenadeThrower : MonoBehaviour
                 ThrowGrenade();
             }
         }
+        
+        if (isOnCooldown)
+        {
+            float timePassed = Time.time - lastThrowTime;
+            float ratio = Mathf.Clamp01(timePassed / grenadeCooldown);
+            JoystickBackground.fillAmount = 1f - ratio;
+            CooldownFillImage.fillAmount = 1f - ratio;
+
+            if (ratio >= 1f)
+            {
+                isOnCooldown = false;
+                
+                JoystickHandleObject.SetActive(true); 
+                JoystickBackground.fillAmount = 1f;
+                CooldownFillImage.fillAmount = 0f;
+                CooldownFillImage.raycastTarget = false;
+            }
+        }
     }
 
     void StartAiming()
     {
+        if (Time.time < lastThrowTime + grenadeCooldown)
+            return;
+        
+        CooldownFillImage.fillAmount = 0f;
         isAiming = true;
 
         if (currentCircle == null)
@@ -102,6 +135,13 @@ public class GrenadeThrower : MonoBehaviour
 
         heldGrenade = null;
         heldRb = null;
+        
+        lastThrowTime = Time.time;
+        isOnCooldown = true;
+        
+        JoystickBackground.fillAmount = 1f;
+        CooldownFillImage.raycastTarget = true;
+        JoystickHandleObject.SetActive(false);   
     }
 
     void UpdateCirclePosition(Vector3 inputDirection)
@@ -155,14 +195,44 @@ public class GrenadeThrower : MonoBehaviour
 
     public void OnPointerDown(BaseEventData eventData)
     {
+        if (isOnCooldown) return;
         isHoldingTouch = true;
     }
 
     public void OnPointerUp(BaseEventData eventData)
     {
+        if (isOnCooldown) return;
+
         if (isAiming)
             ThrowGrenade();
 
         isHoldingTouch = false;
+    }
+    
+    public float GetCooldownGrenade()
+    {
+        float remaining = (lastThrowTime + grenadeCooldown) - Time.time;
+        return Mathf.Max(remaining, 0f);
+    }
+
+    public void SetCooldownGrenade(float value)
+    {
+        lastThrowTime = Time.time - (grenadeCooldown - value);
+        isOnCooldown = value > 0f;
+
+        if (isOnCooldown)
+        {
+            JoystickHandleObject.SetActive(false);
+            CooldownFillImage.raycastTarget = true;
+            JoystickBackground.fillAmount = 1f - value / grenadeCooldown;
+            CooldownFillImage.fillAmount = 1f - value / grenadeCooldown;
+        }
+        else
+        {
+            JoystickHandleObject.SetActive(true);
+            CooldownFillImage.raycastTarget = false;
+            JoystickBackground.fillAmount = 1f;
+            CooldownFillImage.fillAmount = 0f;
+        }
     }
 }

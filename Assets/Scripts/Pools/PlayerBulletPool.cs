@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerBulletPool : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public int poolSize = 20;
+    public int poolSize = 5;
 
     private List<GameObject> bullets = new();
 

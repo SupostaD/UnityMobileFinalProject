@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 using System.IO;
@@ -10,10 +11,13 @@ public class SaveSlotButton : MonoBehaviour
     private SaveLoadController saveLoader;
     public RawImage previewImage;
 
+    private string playerName;
+
     public void Setup(SaveData data, string fileName, SaveLoadController loader)
     {
         saveFileName = fileName;
         saveLoader = loader;
+        playerName = data.playerName;
 
         slotLabel.text =
             $"{data.playerName} " +
@@ -21,7 +25,7 @@ public class SaveSlotButton : MonoBehaviour
             $"{data.controlScheme} " +
             $"{FormatTime(data.elapsedTime)}\n" +
             $"Score: {data.score}";
-        
+
         string previewPath = Path.Combine(Application.persistentDataPath, fileName + "_preview.png");
         if (File.Exists(previewPath))
         {
@@ -38,7 +42,11 @@ public class SaveSlotButton : MonoBehaviour
 
     public void OnClick()
     {
-        saveLoader.LoadGame(saveFileName);
+        DailyRewardManager rewardManager = FindAnyObjectByType<DailyRewardManager>();
+        rewardManager.CheckAndShowReward(playerName, () =>
+        {
+            saveLoader.LoadGame(saveFileName);
+        });
     }
 
     private string FormatTime(float seconds)
