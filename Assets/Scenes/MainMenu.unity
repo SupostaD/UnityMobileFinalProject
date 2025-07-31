@@ -252,6 +252,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75258411}
   m_CullTransparentMesh: 1
+--- !u!1 &89166114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 89166116}
+  - component: {fileID: 89166115}
+  m_Layer: 0
+  m_Name: SaveApplier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &89166115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89166114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066b9d4ec4e92f24e88796e7c5dcd1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletFromPlayerPrefab: {fileID: 3012808492320493129, guid: 41d4343565d1f2b4cbb614ffa55564cd, type: 3}
+  bulletFromEnemyPrefab: {fileID: 3012808492320493129, guid: 9ca9d0c0d22864a469f41e3ee1d4013f, type: 3}
+  enemyPrefab: {fileID: 54281057952729912, guid: c1c50b6a3288fdf41a0b1ba5ffe587d9, type: 3}
+--- !u!4 &89166116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89166114}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 525.0943, y: 273.69504, z: 3.6685753}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &114240509
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +417,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotButtonPrefab: {fileID: 1868791733702383099, guid: 2d4eddd1fa988fb40a814116a1a38a2b, type: 3}
   slotParent: {fileID: 332771243}
-  saveLoader: {fileID: 330850367}
 --- !u!1 &115793534
 GameObject:
   m_ObjectHideFlags: 0
@@ -3279,7 +3325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 729482965}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7331,7 +7377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeCanvasGroup: {fileID: 5223456582498338793}
-  fadeDuration: 1
+  fadeDuration: 0.75
 --- !u!1 &2579081358050733098
 GameObject:
   m_ObjectHideFlags: 0
@@ -7538,8 +7584,9 @@ SceneRoots:
   - {fileID: 1419657131}
   - {fileID: 1924761313}
   - {fileID: 2099319247}
-  - {fileID: 330850368}
   - {fileID: 729482966}
+  - {fileID: 330850368}
+  - {fileID: 89166116}
   - {fileID: 141298667}
   - {fileID: 2091558424}
   - {fileID: 1370288004}

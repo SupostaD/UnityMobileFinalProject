@@ -8,7 +8,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     [SerializeField] private CanvasGroup fadeCanvasGroup;
     [SerializeField] private float fadeDuration = 10f;
-
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -29,11 +29,6 @@ public class SceneTransitionManager : MonoBehaviour
     public void TransitionToScene(string sceneName)
     {
         StartCoroutine(FadeOutInAndLoad(sceneName));
-    }
-
-    public void FadeOnly()
-    {
-        StartCoroutine(FadeOutIn());
     }
 
     IEnumerator FadeIn()
@@ -60,14 +55,10 @@ public class SceneTransitionManager : MonoBehaviour
         yield return StartCoroutine(FadeIn());
     }
 
-    IEnumerator FadeOutIn()
-    {
-        yield return StartCoroutine(FadeOut());
-        yield return StartCoroutine(FadeIn());
-    }
-
     IEnumerator FadeOut()
     {
+        Time.timeScale = 1f;
+        
         fadeCanvasGroup.blocksRaycasts = true;
         float time = 0f;
         while (time < fadeDuration)

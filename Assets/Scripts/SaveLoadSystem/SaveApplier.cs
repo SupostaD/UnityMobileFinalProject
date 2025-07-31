@@ -1,28 +1,50 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SaveApplier : MonoBehaviour
 {
+    public static SaveApplier Instance;
+
     public GameObject bulletFromPlayerPrefab;
     public GameObject bulletFromEnemyPrefab;
     public GameObject enemyPrefab;
-    void Awake()
+    
+    private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (Instance == this)
+            SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    /*
-    void Awake()
-    */
     {
+        if (GameManager.Instance.PendingLoadData != null)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            StartCoroutine(ApplyDataDelayed());
+        }
+    }
+
+    private IEnumerator ApplyDataDelayed()
+    {
+        yield return new WaitForSeconds(0.8f);
+
         var data = GameManager.Instance.PendingLoadData;
-        if (data == null) return;
+        if (data == null) yield break;
 
         Debug.Log("Applying saved data...");
 
@@ -37,6 +59,8 @@ public class SaveApplier : MonoBehaviour
         {
             player.transform.position = data.playerPosition;
             player.transform.rotation = data.playerRotation;
+            Debug.Break();
+            
             player.GetComponent<Health>().SetHealth(data.playerHP);
 
             var shooter = player.GetComponent<AutoShooter>();
@@ -44,62 +68,53 @@ public class SaveApplier : MonoBehaviour
             {
                 shooter.SetCooldown(data.weaponCooldown);
                 shooter.SetBulletCount(data.bulletsInMagazine);
-                Debug.Log("Set cooldown bullets and set bullet count from save!");
             }
 
             var roll = player.GetComponent<PlayerRoll>();
             if (roll != null)
             {
                 roll.SetCooldownRoll(data.rollCooldown);
-                Debug.Log("Set cooldown roll from save!");
             }
 
             var grenadeThrower = player.GetComponent<GrenadeThrower>();
             if (grenadeThrower != null)
             {
                 grenadeThrower.SetCooldownGrenade(data.grenadeCooldown);
-                Debug.Log("Set cooldown grenade thrower from save!");
-            }
 
-            if (data.hasActiveGrenade)
-            {
-                var grenadeData = data.activeGrenade;
-                GameObject grenadeObj = Instantiate(grenadeThrower.GrenadePrefab, grenadeData.position, Quaternion.identity);
-                Rigidbody rb = grenadeObj.GetComponent<Rigidbody>();
-                rb.isKinematic = false;
-                rb.useGravity = true;
-                rb.linearVelocity = grenadeData.velocity;
+                if (data.hasActiveGrenade)
+                {
+                    var grenadeData = data.activeGrenade;
+                    GameObject grenadeObj = Instantiate(grenadeThrower.GrenadePrefab, grenadeData.position, Quaternion.identity);
+                    Rigidbody rb = grenadeObj.GetComponent<Rigidbody>();
+                    rb.isKinematic = false;
+                    rb.useGravity = true;
+                    rb.linearVelocity = grenadeData.velocity;
 
-                var grenade = grenadeObj.GetComponent<Grenade>();
-                grenade.ApplySaveData(grenadeData);
-
-                Debug.Log("Spawning grenade from save!");
+                    var grenade = grenadeObj.GetComponent<Grenade>();
+                    grenade.ApplySaveData(grenadeData);
+                }
             }
         }
 
         var spawner = FindObjectOfType<EnemySpawner>();
-        spawner.suppressSpawning = true;
+        if (spawner != null)
+            spawner.DisableSpawningFromSave();
 
         foreach (var enemyData in data.enemies)
         {
             GameObject enemyObj = Instantiate(enemyPrefab, enemyData.Position, enemyData.Rotation);
-            Enemy enemy = enemyObj.GetComponent<Enemy>();
-
+            var enemy = enemyObj.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.ApplySaveData(enemyData);
-                Debug.Log($"Spawned enemy");
             }
         }
 
-        spawner.suppressSpawning = false;
-        
         foreach (var bulletData in data.bulletsFromPlayer)
         {
             GameObject bulletObj = Instantiate(bulletFromPlayerPrefab, bulletData.position, bulletData.rotation);
             var bullet = bulletObj.GetComponent<BulletMovement>();
             bullet?.ApplySaveData(bulletData);
-            Debug.Log("Spawned bullet from player from save!");
         }
 
         foreach (var bulletData in data.bulletsFromEnemy)
@@ -107,7 +122,6 @@ public class SaveApplier : MonoBehaviour
             GameObject bulletObj = Instantiate(bulletFromEnemyPrefab, bulletData.position, bulletData.rotation);
             var bullet = bulletObj.GetComponent<EnemyBullet>();
             bullet?.ApplySaveData(bulletData);
-            Debug.Log("Spawned bullet from enemy from save!");
         }
 
         GameManager.Instance.SetPendingLoadData(null);

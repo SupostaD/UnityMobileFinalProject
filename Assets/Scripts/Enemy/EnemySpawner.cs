@@ -13,11 +13,18 @@ public class EnemySpawner : MonoBehaviour
 
 
     private float spawnTimer;
+    private bool enemiesLoadedFromSave = false;
+
+    public void DisableSpawningFromSave()
+    {
+        enemiesLoadedFromSave = true;
+        suppressSpawning = true;
+    }
 
     void Update()
     {
-        if (suppressSpawning) return;
-
+        if (suppressSpawning || enemiesLoadedFromSave) return;
+    
         spawnTimer -= Time.deltaTime;
 
         if (spawnTimer <= 0f)

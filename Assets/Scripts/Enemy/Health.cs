@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
 
     public UnityEvent OnDeath;
     public UnityEvent<float> OnHealthChanged;
+    public bool OverrideHealthFromSave = false;
 
     private IHealthUIUpdater[] uiElements;
 
@@ -25,7 +26,8 @@ public class Health : MonoBehaviour
 
         score = stats.GetScoreByDifficulty(difficulty);
 
-        currentHealth = maxHealth;
+        if (!OverrideHealthFromSave)
+            currentHealth = maxHealth;
 
         uiElements = GetComponentsInChildren<IHealthUIUpdater>();
 
@@ -75,11 +77,10 @@ public class Health : MonoBehaviour
     public void SetHealth(int value)
     {
         currentHealth = value;
+        OverrideHealthFromSave = true;
         UpdateAllUI();
 
         if (currentHealth <= 0)
-        {
             OnDeath?.Invoke();
-        }
     }
 }

@@ -20,6 +20,6 @@ public class Enemy : MonoBehaviour
     public void ApplySaveData(EnemyData data)
     {
         transform.position = data.Position;
-        health.currentHealth = data.Hp;
+        health.SetHealth(data.Hp);
     }
 }

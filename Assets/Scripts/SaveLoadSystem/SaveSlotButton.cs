@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using System.IO;
@@ -8,15 +9,13 @@ public class SaveSlotButton : MonoBehaviour
 {
     public TMP_Text slotLabel;
     private string saveFileName;
-    private SaveLoadController saveLoader;
     public RawImage previewImage;
 
     private string playerName;
 
-    public void Setup(SaveData data, string fileName, SaveLoadController loader)
+    public void Setup(SaveData data, string fileName)
     {
         saveFileName = fileName;
-        saveLoader = loader;
         playerName = data.playerName;
 
         slotLabel.text =
@@ -45,8 +44,15 @@ public class SaveSlotButton : MonoBehaviour
         DailyRewardManager rewardManager = FindAnyObjectByType<DailyRewardManager>();
         rewardManager.CheckAndShowReward(playerName, () =>
         {
-            saveLoader.LoadGame(saveFileName);
+            //SaveLoadController.Instance.LoadGame(saveFileName);
+            StartCoroutine(DelayedLoad());        
         });
+    }
+    
+    private IEnumerator DelayedLoad()
+    {
+        yield return null; // дождись конца текущего кадра
+        SaveLoadController.Instance.LoadGame(saveFileName);
     }
 
     private string FormatTime(float seconds)

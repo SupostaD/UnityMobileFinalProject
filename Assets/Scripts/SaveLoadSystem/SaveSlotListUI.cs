@@ -6,7 +6,6 @@ public class SaveSlotListUI : MonoBehaviour
 {
     public GameObject slotButtonPrefab;
     public Transform slotParent;
-    public SaveLoadController saveLoader;
 
     void OnEnable()
     {
@@ -36,7 +35,7 @@ public class SaveSlotListUI : MonoBehaviour
 
             GameObject slotGO = Instantiate(slotButtonPrefab, slotParent);
             var slot = slotGO.GetComponent<SaveSlotButton>();
-            slot.Setup(data, fileName, saveLoader);
+            slot.Setup(data, fileName);
         }
     }
 }

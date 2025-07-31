@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class SaveUI : MonoBehaviour
 {
-    public SaveLoadController saveLoader;
     public SaveSlotListUI slotListUI;
 
     public void SaveNewGame()
@@ -13,7 +12,7 @@ public class SaveUI : MonoBehaviour
         Texture2D tex = ScreenshotUtility.Instance.Capture();
         ScreenshotUtility.Instance.SaveTextureToPNG(tex, slotName + "_preview.png");
 
-        saveLoader.SaveGame(slotName);
+        SaveLoadController.Instance.SaveGame(slotName);
         slotListUI.LoadAllSlots();
     }
 }
