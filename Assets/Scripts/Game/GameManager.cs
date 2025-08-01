@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,9 +36,16 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        elapsedTime += Time.deltaTime;
+        if (IsGameplayScene())
+            elapsedTime += Time.deltaTime;
     }
-    
+
+    private bool IsGameplayScene()
+    {
+        string sceneName = "MainScene";
+        string currentScene = SceneManager.GetActiveScene().name;
+        return currentScene == sceneName;
+    }
     public void SetControlScheme(ControlScheme scheme)
     {
         controlScheme = scheme;
