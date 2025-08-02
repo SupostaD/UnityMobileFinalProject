@@ -9,11 +9,16 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     private IPlayerInput playerInput;
     private Vector3 moveDirection;
-    
 
     private void Start()
     {
         playerInput = ControllScheme.PlayerInput;
+        if (PlayerRoll == null)
+            PlayerRoll = GetComponent<PlayerRoll>();
+        if (ControllScheme == null)
+            ControllScheme = GetComponent<ControllSchemePlayerManager>();
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
     }
 
     void Update()

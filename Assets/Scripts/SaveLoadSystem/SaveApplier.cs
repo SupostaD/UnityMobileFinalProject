@@ -9,7 +9,7 @@ public class SaveApplier : MonoBehaviour
     public GameObject bulletFromPlayerPrefab;
     public GameObject bulletFromEnemyPrefab;
     public GameObject enemyPrefab;
-    
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -20,31 +20,34 @@ public class SaveApplier : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnDestroy()
+    public IEnumerator ApplyDataDelayed()
     {
-        if (Instance == this)
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (GameManager.Instance.PendingLoadData != null)
-        {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-            StartCoroutine(ApplyDataDelayed());
-        }
-    }
-
-    private IEnumerator ApplyDataDelayed()
-    {
-        yield return new WaitForSeconds(0.8f);
-
         var data = GameManager.Instance.PendingLoadData;
-        if (data == null) yield break;
+        if (data == null)
+        {
+            Debug.LogWarning("No data to apply.");
+            yield break;
+        }
+
+        // Ждем появления игрока
+        yield return new WaitUntil(() => GameObject.FindGameObjectWithTag("Player") != null);
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log("2 " + player.name + player.transform.position);
+
+        yield return new WaitForSeconds(1.3f); // подстраховка, лучше чем 0.8
+
+        ApplyData();
+
+        GameManager.Instance.SetPendingLoadData(null);
+    }
+
+    private void ApplyData()
+    {
+        var data = GameManager.Instance.PendingLoadData;
+        if (data == null) return;
 
         Debug.Log("Applying saved data...");
 
@@ -55,12 +58,14 @@ public class SaveApplier : MonoBehaviour
         GameManager.Instance.SetElapsedTime(data.elapsedTime);
 
         var player = GameObject.FindGameObjectWithTag("Player");
+
         if (player != null)
         {
             player.transform.position = data.playerPosition;
             player.transform.rotation = data.playerRotation;
-            Debug.Break();
-            
+            Debug.Log("3 " + player.name + player.transform.position);
+            //Debug.Break();
+
             player.GetComponent<Health>().SetHealth(data.playerHP);
 
             var shooter = player.GetComponent<AutoShooter>();
@@ -72,9 +77,7 @@ public class SaveApplier : MonoBehaviour
 
             var roll = player.GetComponent<PlayerRoll>();
             if (roll != null)
-            {
                 roll.SetCooldownRoll(data.rollCooldown);
-            }
 
             var grenadeThrower = player.GetComponent<GrenadeThrower>();
             if (grenadeThrower != null)
@@ -98,33 +101,25 @@ public class SaveApplier : MonoBehaviour
 
         var spawner = FindObjectOfType<EnemySpawner>();
         if (spawner != null)
-            spawner.DisableSpawningFromSave();
+            spawner.waitForLoad = false;
 
         foreach (var enemyData in data.enemies)
         {
             GameObject enemyObj = Instantiate(enemyPrefab, enemyData.Position, enemyData.Rotation);
             var enemy = enemyObj.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.ApplySaveData(enemyData);
-            }
+            enemy?.ApplySaveData(enemyData);
         }
 
         foreach (var bulletData in data.bulletsFromPlayer)
         {
             GameObject bulletObj = Instantiate(bulletFromPlayerPrefab, bulletData.position, bulletData.rotation);
-            var bullet = bulletObj.GetComponent<BulletMovement>();
-            bullet?.ApplySaveData(bulletData);
+            bulletObj.GetComponent<BulletMovement>()?.ApplySaveData(bulletData);
         }
 
         foreach (var bulletData in data.bulletsFromEnemy)
         {
             GameObject bulletObj = Instantiate(bulletFromEnemyPrefab, bulletData.position, bulletData.rotation);
-            var bullet = bulletObj.GetComponent<EnemyBullet>();
-            bullet?.ApplySaveData(bulletData);
+            bulletObj.GetComponent<EnemyBullet>()?.ApplySaveData(bulletData);
         }
-
-        GameManager.Instance.SetPendingLoadData(null);
-        Time.timeScale = 1f;
     }
 }

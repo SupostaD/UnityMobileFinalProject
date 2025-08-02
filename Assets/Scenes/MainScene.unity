@@ -9866,7 +9866,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  suppressSpawning: 0
+  waitForLoad: 1
 --- !u!1 &5805357053138511081
 GameObject:
   m_ObjectHideFlags: 0
@@ -11422,7 +11422,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotButtonPrefab: {fileID: 1868791733702383099, guid: 2d4eddd1fa988fb40a814116a1a38a2b, type: 3}
   slotParent: {fileID: 2990676267302345457}
-  saveLoader: {fileID: 0}
 --- !u!224 &8798683461410030416
 RectTransform:
   m_ObjectHideFlags: 0

@@ -7,8 +7,8 @@ public class SceneTransitionManager : MonoBehaviour
     public static SceneTransitionManager Instance;
 
     [SerializeField] private CanvasGroup fadeCanvasGroup;
-    [SerializeField] private float fadeDuration = 10f;
-    
+    [SerializeField] private float fadeDuration = 1f;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -31,7 +31,39 @@ public class SceneTransitionManager : MonoBehaviour
         StartCoroutine(FadeOutInAndLoad(sceneName));
     }
 
-    IEnumerator FadeIn()
+    private IEnumerator FadeOutInAndLoad(string sceneName)
+    {
+        yield return StartCoroutine(FadeOut());
+        
+        Time.timeScale = 1f;
+
+        // Загружаем сцену
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        while (!asyncLoad.isDone)
+        {
+            Debug.Log(asyncLoad.progress);
+            yield return null;
+        }
+        
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+            Debug.Log("1 " + player.name + player.transform.position);
+
+        // ⏳ Подождать чуть-чуть после загрузки
+        yield return new WaitForSeconds(1.5f);
+
+        // ⛓ Применить сейв (если есть)
+        if (GameManager.Instance.PendingLoadData != null)
+        {
+            yield return StartCoroutine(SaveApplier.Instance.ApplyDataDelayed());
+        }
+        
+        Debug.Log("4 " + player.name + player.transform.position);
+
+        yield return StartCoroutine(FadeIn());
+    }
+
+    private IEnumerator FadeIn()
     {
         fadeCanvasGroup.blocksRaycasts = true;
         float time = 0f;
@@ -46,19 +78,10 @@ public class SceneTransitionManager : MonoBehaviour
         fadeCanvasGroup.blocksRaycasts = false;
     }
 
-    IEnumerator FadeOutInAndLoad(string sceneName)
-    {
-        yield return StartCoroutine(FadeOut());
-
-        SceneManager.LoadScene(sceneName);
-
-        yield return StartCoroutine(FadeIn());
-    }
-
-    IEnumerator FadeOut()
+    private IEnumerator FadeOut()
     {
         Time.timeScale = 1f;
-        
+
         fadeCanvasGroup.blocksRaycasts = true;
         float time = 0f;
         while (time < fadeDuration)

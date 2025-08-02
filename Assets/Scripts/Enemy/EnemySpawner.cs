@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -9,22 +10,31 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval = 3f;
     public LayerMask enemyLayer;
     public LayerMask playerLayer;
-    public bool suppressSpawning = false;
-
+    public bool waitForLoad = true;
 
     private float spawnTimer;
-    private bool enemiesLoadedFromSave = false;
 
-    public void DisableSpawningFromSave()
+    private void Start()
     {
-        enemiesLoadedFromSave = true;
-        suppressSpawning = true;
+        StartCoroutine(WaitThenSpawn());
     }
+    
+    private IEnumerator WaitThenSpawn()
+    {
+        // Ждём пока SaveApplier разрешит
+        yield return new WaitUntil(() => waitForLoad == false);
 
+        SpawnEnemies();
+    }
+    
     void Update()
     {
-        if (suppressSpawning || enemiesLoadedFromSave) return;
+        if (!waitForLoad)
+            SpawnEnemies();
+    }
     
+    public void SpawnEnemies()
+    {
         spawnTimer -= Time.deltaTime;
 
         if (spawnTimer <= 0f)

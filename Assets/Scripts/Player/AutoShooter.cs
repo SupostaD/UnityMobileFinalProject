@@ -37,6 +37,10 @@ public class AutoShooter : MonoBehaviour
         currentBullets = MaxBullets;
         UpdateMagazineSprite(); 
         ReloadFillImage.fillAmount = 1f;
+        if (PlayerRoll == null)
+            PlayerRoll = GetComponent<PlayerRoll>();
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
