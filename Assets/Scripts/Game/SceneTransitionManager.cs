@@ -57,8 +57,11 @@ public class SceneTransitionManager : MonoBehaviour
         {
             yield return StartCoroutine(SaveApplier.Instance.ApplyDataDelayed());
         }
-        
-        Debug.Log("4 " + player.name + player.transform.position);
+
+        if (player != null)
+        {
+            Debug.Log("4 " + player.name + player.transform.position);
+        }
 
         yield return StartCoroutine(FadeIn());
     }
