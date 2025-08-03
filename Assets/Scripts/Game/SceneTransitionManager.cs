@@ -37,7 +37,6 @@ public class SceneTransitionManager : MonoBehaviour
         
         Time.timeScale = 1f;
 
-        // Загружаем сцену
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         while (!asyncLoad.isDone)
         {
@@ -46,19 +45,19 @@ public class SceneTransitionManager : MonoBehaviour
         }
         
         var player = GameObject.FindGameObjectWithTag("Player");
+        
         if (player != null)
             Debug.Log("1 " + player.name + player.transform.position);
 
-        // ⏳ Подождать чуть-чуть после загрузки
         yield return new WaitForSeconds(1.5f);
 
-        // ⛓ Применить сейв (если есть)
         if (GameManager.Instance.PendingLoadData != null)
         {
             yield return StartCoroutine(SaveApplier.Instance.ApplyDataDelayed());
         }
         
-        Debug.Log("4 " + player.name + player.transform.position);
+        if (player != null)
+            Debug.Log("4 " + player.name + player.transform.position);
 
         yield return StartCoroutine(FadeIn());
     }

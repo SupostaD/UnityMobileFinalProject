@@ -51,11 +51,13 @@ public class Health : MonoBehaviour
         {
             GameManager.Instance.AddScore(score);
             AudioManager.Instance.PlaySFX("Death");
+            VibrationManager.VibrateSuccess();
             OnDeath?.Invoke();
         }
         else if (currentHealth <= 0 && gameObject.CompareTag("Player"))
         {
             AudioManager.Instance.PlaySFX("Death");
+            VibrationManager.VibrateFailure();
             OnDeath?.Invoke();
         }
     }
