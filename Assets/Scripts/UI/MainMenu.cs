@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
             warningText.text = "";
             GameManager.Instance.SetPlayerName(enteredName);
             AnalyticsManager.Instance.StartSession();
-            SceneTransitionManager.Instance.TransitionToScene("SceneDaniel");
+            SceneTransitionManager.Instance.TransitionToScene("MainScene");
         }
     }
 
