@@ -26,15 +26,14 @@ public class EnemyBulletPool : MonoBehaviour
     {
         foreach (GameObject bullet in bullets)
         {
-            if (!bullet.activeInHierarchy)
+            if (bullet != null && !bullet.activeInHierarchy)
             {
-                bullet.transform.position = position;
-                bullet.transform.rotation = rotation;
+                bullet.transform.SetPositionAndRotation(position, rotation);
                 bullet.SetActive(true);
                 return bullet;
             }
         }
-        
+
         GameObject newBullet = Instantiate(bulletPrefab, position, rotation);
         newBullet.SetActive(true);
         bullets.Add(newBullet);

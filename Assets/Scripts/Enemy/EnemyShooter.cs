@@ -2,92 +2,80 @@ using JetBrains.Annotations;
 using UnityEngine;
 public class EnemyShooter : MonoBehaviour
 {
-    public Transform FirePoint;
-    public float FireRate = 1f;
-    public float BulletSpeed = 10f;
-    public float ShootRadius = 5f;
-    public LayerMask PlayerLayer;
+    public Transform firePoint;
+    public float shootCooldown = 2f;
+    public float bulletSpeed = 10f;
     public Collider shooterCollider;
     public Animator animator;
 
-    private float fireCooldown;
+    private float cooldownTimer = 0f;
+    private Transform target;
 
     void Update()
     {
-        Collider[] playersInRange = Physics.OverlapSphere(transform.position, ShootRadius, PlayerLayer);
-
-        if (playersInRange.Length == 0)
+        if (target == null || !target.gameObject.activeInHierarchy)
         {
-            animator.SetBool("isShooting", false);
+            animator?.SetBool("isShooting", false);
             return;
         }
 
-        Transform? closestPlayer = FindClosestTarget(playersInRange);
-
-        fireCooldown -= Time.deltaTime;
-
-        if (fireCooldown <= 0f && closestPlayer != null)
+        cooldownTimer -= Time.deltaTime;
+        if (cooldownTimer <= 0f)
         {
-            fireCooldown = 1f / FireRate;
-            ShootAtTarget(closestPlayer);
+            Shoot();
+            cooldownTimer = shootCooldown;
         }
     }
 
-    void ShootAtTarget(Transform target)
+    private void Shoot()
     {
-        Vector3 dir = (target.position - FirePoint.position).normalized;
+        if (firePoint == null || target == null) return;
+
+        Vector3 direction = (target.position - firePoint.position).normalized;
 
         Vector3 lookDir = target.position - transform.position;
         lookDir.y = 0f;
-
         if (lookDir.sqrMagnitude > 0.01f)
             transform.rotation = Quaternion.LookRotation(lookDir);
 
-        float distance = Vector3.Distance(FirePoint.position, target.position);
-
-        if (Physics.Raycast(FirePoint.position, dir, out RaycastHit hit, distance))
+        float distance = Vector3.Distance(firePoint.position, target.position);
+        if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance))
         {
             if (hit.transform != target)
                 return;
         }
 
-        GameObject bullet = EnemyBulletPool.Instance.GetBullet(FirePoint.position, Quaternion.LookRotation(dir));
+        GameObject bullet = EnemyBulletPool.Instance.GetBullet(firePoint.position, Quaternion.LookRotation(direction));
+        if (bullet == null)
+        {
+            Debug.LogWarning("Bullet pool returned null!");
+            return;
+        }
 
-        Collider bulletCollider = bullet.GetComponent<Collider>();
-        if (bulletCollider != null && shooterCollider != null)
-            Physics.IgnoreCollision(bulletCollider, shooterCollider);
+        Collider bulletCol = bullet.GetComponent<Collider>();
+        if (bulletCol != null && shooterCollider != null)
+            Physics.IgnoreCollision(bulletCol, shooterCollider);
 
+        // Настройка Rigidbody
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            AudioManager.Instance.PlaySFX("Shoot");
-            animator.SetBool("isShooting", true);
-            rb.linearVelocity = dir * BulletSpeed;
-        }
-    }
-
-    [CanBeNull]
-    Transform FindClosestTarget(Collider[] targets)
-    {
-        Transform closest = null;
-        float minSqrDist = Mathf.Infinity;
-
-        foreach (var col in targets)
-        {
-            float sqrDist = (col.transform.position - transform.position).sqrMagnitude;
-            if (sqrDist < minSqrDist)
-            {
-                minSqrDist = sqrDist;
-                closest = col.transform;
-            }
+            rb.linearVelocity = direction * bulletSpeed;
         }
 
-        return closest;
+        AudioManager.Instance?.PlaySFX("Shoot");
+        animator?.SetBool("isShooting", true);
+
+        Debug.Log("Enemy shot at: " + target.name);
     }
 
-    void OnDrawGizmosSelected()
+    public void SetTarget(Transform newTarget)
     {
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, ShootRadius);
+        target = newTarget;
+    }
+
+    public void ClearTarget()
+    {
+        target = null;
     }
 }
