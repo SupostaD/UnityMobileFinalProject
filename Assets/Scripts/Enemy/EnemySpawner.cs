@@ -10,29 +10,34 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval = 3f;
     public LayerMask enemyLayer;
     public LayerMask playerLayer;
-    public bool waitForLoad = true;
 
     private float spawnTimer;
+    private bool spawnAllowed = false;
 
     private void Start()
     {
-        StartCoroutine(WaitThenSpawn());
+        if (GameManager.Instance.IsLoadingFromSave)
+        {
+            StartCoroutine(WaitForSaveApply());
+        }
+        else
+        {
+            spawnAllowed = true;
+        }
     }
-    
-    private IEnumerator WaitThenSpawn()
-    {
-        // Ждём пока SaveApplier разрешит
-        yield return new WaitUntil(() => waitForLoad == false);
 
-        SpawnEnemies();
+    private IEnumerator WaitForSaveApply()
+    {
+        yield return new WaitUntil(() => GameManager.Instance.IsLoadingFromSave == false);
+        spawnAllowed = true;
     }
-    
+
     void Update()
     {
-        if (!waitForLoad)
-            SpawnEnemies();
+        if (!spawnAllowed) return;
+        SpawnEnemies();
     }
-    
+
     public void SpawnEnemies()
     {
         spawnTimer -= Time.deltaTime;

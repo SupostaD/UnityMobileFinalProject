@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public SaveData PendingLoadData => pendingLoadData;
     public int DailyRewardStreak { get; set; } = 1;
     public string LastRewardClaimDate { get; set; } = "";
+    public bool IsLoadingFromSave { get; private set; }
+
     
     private void Awake()
     {
@@ -51,6 +53,16 @@ public class GameManager : MonoBehaviour
     {
         controlScheme = scheme;
         OnControlSchemeChanged?.Invoke(controlScheme);
+    }
+    
+    public void MarkLoadFromSave()
+    {
+        IsLoadingFromSave = true;
+    }
+
+    public void ClearLoadFlag()
+    {
+        IsLoadingFromSave = false;
     }
 
     public void AddScore(int amount)

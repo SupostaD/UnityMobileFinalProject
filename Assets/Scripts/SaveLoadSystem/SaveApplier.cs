@@ -99,10 +99,6 @@ public class SaveApplier : MonoBehaviour
             }
         }
 
-        var spawner = FindObjectOfType<EnemySpawner>();
-        if (spawner != null)
-            spawner.waitForLoad = false;
-
         foreach (var enemyData in data.enemies)
         {
             GameObject enemyObj = Instantiate(enemyPrefab, enemyData.Position, enemyData.Rotation);
@@ -121,5 +117,7 @@ public class SaveApplier : MonoBehaviour
             GameObject bulletObj = Instantiate(bulletFromEnemyPrefab, bulletData.position, bulletData.rotation);
             bulletObj.GetComponent<EnemyBullet>()?.ApplySaveData(bulletData);
         }
+        
+        GameManager.Instance.ClearLoadFlag();
     }
 }

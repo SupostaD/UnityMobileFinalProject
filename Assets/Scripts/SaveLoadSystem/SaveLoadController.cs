@@ -98,6 +98,7 @@ public class SaveLoadController : MonoBehaviour
         GameManager.Instance.SetPendingLoadData(data);
         GameManager.Instance.DailyRewardStreak = data.dailyRewardStreak;
         GameManager.Instance.LastRewardClaimDate = data.lastRewardClaimDate;
+        GameManager.Instance.MarkLoadFromSave();
 
         SceneTransitionManager.Instance.TransitionToScene(data.nameScene);
     }
