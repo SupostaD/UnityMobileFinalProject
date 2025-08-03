@@ -24,6 +24,7 @@ public class MainMenu : MonoBehaviour
             GameManager.Instance.SetPlayerName(enteredName);
             AnalyticsManager.Instance.StartSession();
             SceneTransitionManager.Instance.TransitionToScene("MainScene");
+            GameManager.Instance.SetElapsedTime(0f);
         }
     }
 
