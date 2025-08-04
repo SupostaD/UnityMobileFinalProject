@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public Transform[] spawnPoints;
     public float spawnRadius = 5f;
-    public float spawnInterval = 3f;
+    public float spawnInterval = 20f;
     public LayerMask enemyLayer;
     public LayerMask playerLayer;
 
@@ -51,6 +51,12 @@ public class EnemySpawner : MonoBehaviour
 
     void TrySpawnEnemies()
     {
+        int currentEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        int maxEnemies = 10;
+
+        if (currentEnemies >= maxEnemies)
+            return;
+
         foreach (var point in spawnPoints)
         {
             if (point == null) continue;
@@ -60,7 +66,16 @@ public class EnemySpawner : MonoBehaviour
 
             if (!hasEnemyNearby && !hasPlayerNearby)
             {
-                Instantiate(enemyPrefab, point.position, Quaternion.identity);
+                GameObject enemyGO = Instantiate(enemyPrefab, point.position, Quaternion.identity);
+
+                EnemyAI ai = enemyGO.GetComponent<EnemyAI>();
+                if (ai != null)
+                    ai.SetPatrolPoints(spawnPoints);
+
+                currentEnemies++;
+
+                if (currentEnemies >= maxEnemies)
+                    break;
             }
         }
     }

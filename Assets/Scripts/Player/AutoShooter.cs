@@ -99,9 +99,10 @@ public class AutoShooter : MonoBehaviour
         RaycastHit hit;
         float distance = Vector3.Distance(FirePoint.position, target.position);
 
-        if (Physics.Raycast(FirePoint.position, dir, out hit, distance))
+        int mask = ~LayerMask.GetMask("IgnoreRaycast");
+        if (Physics.Raycast(FirePoint.position, dir, out hit, distance, mask))
         {
-            if (hit.transform != target)
+            if (!hit.transform.CompareTag("Enemy"))
                 return;
         }
 

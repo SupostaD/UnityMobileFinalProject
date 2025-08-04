@@ -39,10 +39,15 @@ public class EnemyShooter : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(lookDir);
 
         float distance = Vector3.Distance(firePoint.position, target.position);
-        if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance))
+        int mask = ~LayerMask.GetMask("IgnoreRaycast");
+        if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance, mask))
         {
-            if (hit.transform != target)
+            Debug.DrawRay(firePoint.position, direction * distance, Color.red, 0.5f);
+            if (!hit.transform.CompareTag("Player"))
+            {
+                Debug.Log("Blocked shot by: " + hit.transform.name);
                 return;
+            }
         }
 
         GameObject bullet = EnemyBulletPool.Instance.GetBullet(firePoint.position, Quaternion.LookRotation(direction));
@@ -56,7 +61,6 @@ public class EnemyShooter : MonoBehaviour
         if (bulletCol != null && shooterCollider != null)
             Physics.IgnoreCollision(bulletCol, shooterCollider);
 
-        // Настройка Rigidbody
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
