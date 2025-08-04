@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4280011068956294652}
   - component: {fileID: -1335500669706726009}
   - component: {fileID: -5549580617935148218}
-  - component: {fileID: 7962481258916486300}
   - component: {fileID: -739418030326205779}
   - component: {fileID: -1819200785658871698}
   m_Layer: 3
@@ -82,7 +81,7 @@ MonoBehaviour:
   shootCooldown: 2
   bulletSpeed: 10
   shooterCollider: {fileID: 5885812709160215436}
-  animator: {fileID: 7962481258916486300}
+  animator: {fileID: 541144035308945716}
 --- !u!114 &-1335500669706726009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,28 +139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec61ceda1cc1df4e88c13db2675237b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &7962481258916486300
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54281057952729912}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f958d001d11a25640bf9ecfdbe9b592f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!195 &-739418030326205779
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -197,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooter: {fileID: 4280011068956294652}
+  animator: {fileID: 541144035308945716}
 --- !u!1 &1346793808597552071
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,5 +611,10 @@ PrefabInstance:
 --- !u!4 &541144035302026976 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400052, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
+  m_PrefabInstance: {fileID: 541144035301635156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &541144035308945716 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
   m_PrefabInstance: {fileID: 541144035301635156}
   m_PrefabAsset: {fileID: 0}

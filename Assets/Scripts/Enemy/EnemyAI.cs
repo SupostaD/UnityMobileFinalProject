@@ -8,6 +8,8 @@ public class EnemyAI : MonoBehaviour
     [Header("Shooter reference")]
     public EnemyShooter shooter;
 
+    public Animator animator;
+
     private NavMeshAgent agent;
     private Transform player;
     private Transform[] patrolPoints;
@@ -19,6 +21,8 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -28,11 +32,13 @@ public class EnemyAI : MonoBehaviour
             if (inShootRange)
             {
                 agent.ResetPath();
+                animator.SetBool("isRunning", false);
                 shooter.SetTarget(player);
             }
             else
             {
                 agent.SetDestination(player.position);
+                animator.SetBool("isRunning", true);
                 shooter.ClearTarget();
             }
         }
@@ -71,6 +77,7 @@ public class EnemyAI : MonoBehaviour
         // Если дошёл до текущей точки — идём к следующей
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
+            animator.SetBool("isRunning", false);
             GoToNextPatrolPoint();
         }
     }
@@ -85,6 +92,7 @@ public class EnemyAI : MonoBehaviour
         if (nextPoint != null)
         {
             agent.SetDestination(nextPoint.position);
+            animator.SetBool("isRunning", true);
         }
     }
 

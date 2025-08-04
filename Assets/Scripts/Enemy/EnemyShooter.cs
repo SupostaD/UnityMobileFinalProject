@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 public class EnemyShooter : MonoBehaviour
 {
@@ -68,7 +67,7 @@ public class EnemyShooter : MonoBehaviour
         }
 
         AudioManager.Instance?.PlaySFX("Shoot");
-        animator?.SetBool("isShooting", true);
+        //animator?.SetBool("isShooting", true);
 
         Debug.Log("Enemy shot at: " + target.name);
     }
@@ -76,10 +75,12 @@ public class EnemyShooter : MonoBehaviour
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
+        animator.SetBool("isShooting", true);
     }
 
     public void ClearTarget()
     {
         target = null;
+        animator.SetBool("isShooting", false);
     }
 }
