@@ -3295,7 +3295,7 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 4044110d554507c4abef0c85f9c370e2, type: 2}
   defaultBGM: {fileID: 8300000, guid: ff0e0da5e09f1184a8e759cce0681c38, type: 3}
   sfxClips:
-  - {fileID: 8300000, guid: 109bd923a3d2d8a43af2261a3ffc90be, type: 3}
+  - {fileID: 8300000, guid: 34fc5325966119243997828427544019, type: 3}
   - {fileID: 8300000, guid: 997ed83cc8063f94397ec2c78c72d8b7, type: 3}
   - {fileID: 8300000, guid: 65cc74871173c9345a101d0bd7644cca, type: 3}
   - {fileID: 8300000, guid: c7dff65725e485446ad3663d1df405ee, type: 3}
