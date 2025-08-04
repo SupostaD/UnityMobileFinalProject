@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,7 +11,7 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent agent;
     private Transform player;
     private Transform[] patrolPoints;
-    private int currentPatrolIndex = 0;
+    private int currentPatrolIndex = -1;
 
     private bool inVisionRange = false;
     private bool inShootRange = false;
@@ -44,20 +45,32 @@ public class EnemyAI : MonoBehaviour
 
     public void SetPatrolPoints(Transform[] points)
     {
-        patrolPoints = points;
-        currentPatrolIndex = 0;
+        if (points == null || points.Length == 0)
+        {
+            Debug.LogWarning("EnemyAI: Patrol points not set or empty.");
+            return;
+        }
 
-        if (patrolPoints != null && patrolPoints.Length > 0)
-            GoToNextPatrolPoint();
+        patrolPoints = points;
+        currentPatrolIndex = -1;
+
+        // Запускаем патруль на следующем кадре
+        StartCoroutine(DelayedPatrolStart());
+    }
+
+    private IEnumerator DelayedPatrolStart()
+    {
+        yield return null;
+        GoToNextPatrolPoint();
     }
 
     private void Patrol()
     {
-        if (patrolPoints == null || patrolPoints.Length == 0) return;
+        if (patrolPoints == null || patrolPoints.Length == 0 || agent == null) return;
 
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        // Если дошёл до текущей точки — идём к следующей
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
-            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
             GoToNextPatrolPoint();
         }
     }
@@ -65,9 +78,17 @@ public class EnemyAI : MonoBehaviour
     private void GoToNextPatrolPoint()
     {
         if (patrolPoints == null || patrolPoints.Length == 0) return;
-        agent.SetDestination(patrolPoints[currentPatrolIndex].position);
+
+        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+
+        Transform nextPoint = patrolPoints[currentPatrolIndex];
+        if (nextPoint != null)
+        {
+            agent.SetDestination(nextPoint.position);
+        }
     }
-    
+
+    // Vision trigger callbacks
     public void OnPlayerEnteredVision(Transform playerTransform)
     {
         player = playerTransform;
