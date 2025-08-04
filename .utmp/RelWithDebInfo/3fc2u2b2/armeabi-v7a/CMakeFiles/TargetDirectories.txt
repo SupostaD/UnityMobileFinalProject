@@ -1,5 +1,0 @@
-D:/programs/FinalSubmissionUnityMobile/UnityMobileFinalProject/.utmp/RelWithDebInfo/3fc2u2b2/armeabi-v7a/CMakeFiles/edit_cache.dir
-D:/programs/FinalSubmissionUnityMobile/UnityMobileFinalProject/.utmp/RelWithDebInfo/3fc2u2b2/armeabi-v7a/CMakeFiles/rebuild_cache.dir
-D:/programs/FinalSubmissionUnityMobile/UnityMobileFinalProject/.utmp/RelWithDebInfo/3fc2u2b2/armeabi-v7a/GameActivity/CMakeFiles/game.dir
-D:/programs/FinalSubmissionUnityMobile/UnityMobileFinalProject/.utmp/RelWithDebInfo/3fc2u2b2/armeabi-v7a/GameActivity/CMakeFiles/edit_cache.dir
-D:/programs/FinalSubmissionUnityMobile/UnityMobileFinalProject/.utmp/RelWithDebInfo/3fc2u2b2/armeabi-v7a/GameActivity/CMakeFiles/rebuild_cache.dir

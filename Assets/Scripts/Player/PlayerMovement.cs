@@ -1,4 +1,8 @@
+using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     private IPlayerInput playerInput;
     private Vector3 moveDirection;
+    
+    private float turnspeed = 720f;
 
     private void Start()
     {
@@ -34,10 +40,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveDirection.sqrMagnitude > 0.01f)
         {
+            moveDirection.Normalize();
+            Quaternion target = Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                target,
+                turnspeed * Time.deltaTime
+                );
             animator.SetBool("isRunning", true);
             animator.SetBool("isShooting", false);
-            Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 0.2f);
         }
         else animator.SetBool("isRunning", false);
     }
