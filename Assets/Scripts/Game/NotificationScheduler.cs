@@ -13,10 +13,8 @@ public class NotificationScheduler  : MonoBehaviour
         while (request.Status == PermissionStatus.RequestPending)
             yield return null;
 
-        Debug.Log($"Permission request status: {request.Status}");
         if (request.Status != PermissionStatus.Allowed)
         {
-            Debug.LogWarning("Notification permission NOT granted — уведомления не будут показаны.");
             yield break;
         }
 
@@ -37,7 +35,6 @@ public class NotificationScheduler  : MonoBehaviour
         };
 
         AndroidNotificationCenter.RegisterNotificationChannel(channel);
-        Debug.Log("Channel registered");
     }
 
     bool ShouldScheduleNotification()
@@ -59,6 +56,5 @@ public class NotificationScheduler  : MonoBehaviour
 
         AndroidNotificationCenter.SendNotification(notification, ChannelId);
         PlayerPrefs.SetString("LastLoginTime", DateTime.Now.ToString());
-        Debug.Log("Scheduled for " + notification.FireTime);
     }
 }

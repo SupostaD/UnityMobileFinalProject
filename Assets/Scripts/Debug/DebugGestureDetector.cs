@@ -17,30 +17,29 @@ public class DebugGestureDetector : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         if (!IsInGameplay()) return;
 
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
         {
             Vector2 tapPos = Touchscreen.current.primaryTouch.position.ReadValue();
 
-            if (tapPos.x < Screen.width * 0.2f && tapPos.y > Screen.height * 0.8f)
-            {
+            if (tapPos.x < Screen.width * 0.2f && tapPos.y > Screen.height * 0.8f) 
                 RegisterTap();
-            }
         }
 
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
             Vector2 mousePos = Mouse.current.position.ReadValue();
             if (mousePos.x < Screen.width * 0.2f && mousePos.y > Screen.height * 0.8f)
-            {
                 RegisterTap();
-            }
         }
+#endif
     }
 
     private void RegisterTap()
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         float now = Time.time;
         tapTimes.Add(now);
         tapTimes.RemoveAll(t => now - t > gestureTimeLimit);
@@ -50,22 +49,27 @@ public class DebugGestureDetector : MonoBehaviour
             ShowDebugPanel();
             tapTimes.Clear();
         }
+#endif
     }
 
     private void ShowDebugPanel()
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         Time.timeScale = 0f;
         debugPanel.SetActive(true);
         AudioManager.Instance.SetBGMVolume(0.5f);
+#endif
     }
 
     public void HideDebugPanel()
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         Time.timeScale = 1f;
         debugPanel.SetActive(false);
         AudioManager.Instance.SetBGMVolume(1f);
+#endif
     }
-
+    
     private bool IsInGameplay()
     {
         return SceneManager.GetActiveScene().name != "MainMenu";

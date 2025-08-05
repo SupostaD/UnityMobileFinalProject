@@ -24,19 +24,16 @@ public class DebugMenu : MonoBehaviour
     public void SetEasyDifficulty()
     {
         GameManager.Instance.SetDifficulty(Difficulty.Easy);
-        Debug.Log(GameManager.Instance.CurrentDifficulty.ToString());
     }
 
     public void SetMediumDifficulty()
     {
         GameManager.Instance.SetDifficulty(Difficulty.Medium);
-        Debug.Log(GameManager.Instance.CurrentDifficulty.ToString());
     }
 
     public void SetHardDifficulty()
     {
         GameManager.Instance.SetDifficulty(Difficulty.Hard);
-        Debug.Log(GameManager.Instance.CurrentDifficulty.ToString());
     }
 
     public void ToggleGodMode()

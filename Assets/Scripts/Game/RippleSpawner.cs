@@ -31,7 +31,6 @@ public class RippleSpawner : MonoBehaviour
     {
         if (ripplePrefab == null || canvas == null)
         {
-            Debug.LogWarning("RippleSpawner: Prefab or Canvas is not set.");
             return;
         }
 

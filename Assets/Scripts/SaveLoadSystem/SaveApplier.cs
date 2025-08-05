@@ -27,7 +27,6 @@ public class SaveApplier : MonoBehaviour
         var data = GameManager.Instance.PendingLoadData;
         if (data == null)
         {
-            Debug.LogWarning("No data to apply.");
             yield break;
         }
 
@@ -35,7 +34,6 @@ public class SaveApplier : MonoBehaviour
         yield return new WaitUntil(() => GameObject.FindGameObjectWithTag("Player") != null);
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log("2 " + player.name + player.transform.position);
 
         yield return new WaitForSeconds(1.3f); // подстраховка, лучше чем 0.8
 
@@ -48,9 +46,7 @@ public class SaveApplier : MonoBehaviour
     {
         var data = GameManager.Instance.PendingLoadData;
         if (data == null) return;
-
-        Debug.Log("Applying saved data...");
-
+        
         GameManager.Instance.SetPlayerName(data.playerName);
         GameManager.Instance.SetDifficulty((Difficulty)System.Enum.Parse(typeof(Difficulty), data.difficulty));
         GameManager.Instance.SetControlScheme((ControlScheme)System.Enum.Parse(typeof(ControlScheme), data.controlScheme));
@@ -63,8 +59,6 @@ public class SaveApplier : MonoBehaviour
         {
             player.transform.position = data.playerPosition;
             player.transform.rotation = data.playerRotation;
-            Debug.Log("3 " + player.name + player.transform.position);
-            //Debug.Break();
 
             player.GetComponent<Health>().SetHealth(data.playerHP);
 

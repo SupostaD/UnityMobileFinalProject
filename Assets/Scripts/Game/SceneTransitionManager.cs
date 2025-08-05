@@ -40,14 +40,10 @@ public class SceneTransitionManager : MonoBehaviour
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         while (!asyncLoad.isDone)
         {
-            Debug.Log(asyncLoad.progress);
             yield return null;
         }
         
         var player = GameObject.FindGameObjectWithTag("Player");
-        
-        if (player != null)
-            Debug.Log("1 " + player.name + player.transform.position);
 
         yield return new WaitForSeconds(1.5f);
 
@@ -55,9 +51,6 @@ public class SceneTransitionManager : MonoBehaviour
         {
             yield return StartCoroutine(SaveApplier.Instance.ApplyDataDelayed());
         }
-        
-        if (player != null)
-            Debug.Log("4 " + player.name + player.transform.position);
 
         yield return StartCoroutine(FadeIn());
     }

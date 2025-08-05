@@ -35,7 +35,6 @@ public class DailyRewardManager : MonoBehaviour
 
         if (AlreadyClaimedToday())
         {
-            Debug.Log("The award has already been received today.");
             onRewardClaimed?.Invoke();
             return;
         }
@@ -93,9 +92,7 @@ public class DailyRewardManager : MonoBehaviour
         
         DamageMultiplierManager.IsDoubleDamageActive = true;
         StartCoroutine(DisableDoubleDamageAfterSeconds(60));
-
-        Debug.Log($"Awarded. Streak:{rewardData.streakDay}");
-
+        
         if (activePopup != null)
             Destroy(activePopup);
         
@@ -108,6 +105,5 @@ public class DailyRewardManager : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         DamageMultiplierManager.IsDoubleDamageActive = false;
-        Debug.Log("Double damage is over");
     }
 }

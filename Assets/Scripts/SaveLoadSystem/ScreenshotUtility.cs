@@ -42,6 +42,5 @@ public class ScreenshotUtility : MonoBehaviour
         byte[] bytes = tex.EncodeToPNG();
         string path = Path.Combine(Application.persistentDataPath, fileName);
         File.WriteAllBytes(path, bytes);
-        Debug.Log("Saved screenshot to: " + path);
     }
 }

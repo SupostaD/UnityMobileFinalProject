@@ -53,7 +53,6 @@ public class EnemyAI : MonoBehaviour
     {
         if (points == null || points.Length == 0)
         {
-            Debug.LogWarning("EnemyAI: Patrol points not set or empty.");
             return;
         }
 

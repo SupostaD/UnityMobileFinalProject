@@ -44,7 +44,6 @@ public class EnemyShooter : MonoBehaviour
             Debug.DrawRay(firePoint.position, direction * distance, Color.red, 0.5f);
             if (!hit.transform.CompareTag("Player"))
             {
-                Debug.Log("Blocked shot by: " + hit.transform.name);
                 return;
             }
         }
@@ -52,7 +51,6 @@ public class EnemyShooter : MonoBehaviour
         GameObject bullet = EnemyBulletPool.Instance.GetBullet(firePoint.position, Quaternion.LookRotation(direction));
         if (bullet == null)
         {
-            Debug.LogWarning("Bullet pool returned null!");
             return;
         }
 
@@ -67,9 +65,7 @@ public class EnemyShooter : MonoBehaviour
         }
 
         AudioManager.Instance?.PlaySFX("Shoot");
-        //animator?.SetBool("isShooting", true);
 
-        Debug.Log("Enemy shot at: " + target.name);
     }
 
     public void SetTarget(Transform newTarget)

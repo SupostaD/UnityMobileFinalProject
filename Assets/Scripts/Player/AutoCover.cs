@@ -58,7 +58,6 @@ public class AutoCover : MonoBehaviour
 
             animator.SetBool("isRunning", true);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, MoveSpeed * Time.deltaTime);
-            Debug.LogWarning("AutoCover is moving the player!");
             
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
